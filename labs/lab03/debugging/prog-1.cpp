@@ -52,7 +52,10 @@ public:
 
     void append(const T& item)
     {
-        resize(num_entries + 1);
+        if (num_entries >= capacity)
+		{
+			resize(num_entries * 2);
+		}
         data[num_entries] = item;
         num_entries++;
     }
