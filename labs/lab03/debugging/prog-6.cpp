@@ -10,7 +10,7 @@ struct array
     {
     }
 
-    array(size_t size)
+    explicit array(size_t size)
         :data(new int[n]), n(size)
     {
     }
@@ -50,7 +50,8 @@ void print(const array& c)
     std::cout << ")" << std::endl;
 }
 
-void print(double x, std::string extra = "\n")
+template<class T = const char *>
+void print(double x, T extra = "\n")
 {
     std::cout << x << extra;
 }
