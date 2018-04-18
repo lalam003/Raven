@@ -50,8 +50,7 @@ void print(const array& c)
     std::cout << ")" << std::endl;
 }
 
-template<class T>
-void print(double x, T extra = "\n")
+void print(double x, std::string extra = "\n")
 {
     std::cout << x << extra;
 }
