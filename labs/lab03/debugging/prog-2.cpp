@@ -37,7 +37,8 @@ public:
     vec location;
 };
 
-void set_names(object* objects, size_t number_objects, const std::string& base_name)
+template <class T>
+void set_names(T* objects, size_t number_objects, const std::string& base_name)
 {
     for(size_t i = 0; i < number_objects; i++)
     {
@@ -61,8 +62,8 @@ int main()
         points[i].location = origin;
         points[i].location[0] = 0.2 * i;
     }
-    set_names(balls, 10, "ball-");
-    set_names(points, 10, "point-");
+    set_names<sphere>(balls, 10, "ball-");
+    set_names<point>(points, 10, "point-");
 
     for(size_t i = 0; i < 10; i++)
     {
