@@ -1,0 +1,1 @@
+This is the resource folders for JSON files.
