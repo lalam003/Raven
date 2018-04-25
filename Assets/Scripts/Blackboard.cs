@@ -10,6 +10,7 @@ public static class Blackboard
         {
             return ControlMap;
         }
+        ControlMap = newControls;
 
         return newControls;
     }
