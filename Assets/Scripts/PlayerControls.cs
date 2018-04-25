@@ -17,6 +17,11 @@ public class PlayerControls
     public KeyCode West { get; private set; }
     public KeyCode Interact { get; private set; }
 
+    public PlayerControls()
+    {
+        InitializeDefaults();
+    }
+
     public void InitializeDefaults()
     {
         North    = KeyCode.W;

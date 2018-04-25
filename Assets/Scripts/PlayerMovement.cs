@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
     private enum Direction
@@ -12,75 +13,93 @@ public class PlayerMovement : MonoBehaviour
     }
 
     [SerializeField]
-    private const float moveDistance = 1.0f;
+    private float moveSpeed = 1.0f;
+
+    private const string NorthKey = "Up";
+    private const string SouthKey = "Down";
+    private const string EastKey = "Right";
+    private const string WestKey = "Left";
+    private const string IdleKey = "Idle";
 
     private Direction playerFacingDirection;
 
     private PlayerControls playerControls;
 
-    private IEnumerator inputBuffer;
+    private Animator anim;
 
-    private Vector3 targetPos;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
-        playerControls = Blackboard.ParseControlMap(playerControls);
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        playerControls = Blackboard.ParseControlMap(new PlayerControls());
     }
 
     private void FixedUpdate()
     {
-        targetPos = gameObject.transform.position;
-        if(Input.GetKey(playerControls.North))
+        Vector2 targetPos = Vector2.zero;
+        Direction targetDir = playerFacingDirection;
+
+        if (Input.GetKey(playerControls.West))
         {
-            targetPos.x += moveDistance;
-        }
-        if (Input.GetKey(playerControls.South))
-        {
-            targetPos.x += (-1f * moveDistance);
+            targetPos.x += moveSpeed;
+            targetDir = Direction.West;
         }
         if (Input.GetKey(playerControls.East))
         {
-            targetPos.y += moveDistance;
-        }
-        if (Input.GetKey(playerControls.West))
-        {
-            targetPos.y += (-1f * moveDistance);
+            targetPos.x += (-1f * moveSpeed);
+            targetDir = Direction.East;
         }
         if (Input.GetKey(playerControls.North))
         {
-            //Interact
+            targetPos.y += moveSpeed;
+            targetDir = Direction.North;
         }
-        if (targetPos != gameObject.transform.position)
+        if (Input.GetKey(playerControls.South))
         {
-            if (inputBuffer == null)
+            targetPos.y += (-1f * moveSpeed);
+            targetDir = Direction.South;
+        }
+
+        if (Input.GetKey(playerControls.Interact))
+        {
+            //@todo: Implement Interaction here
+        }
+
+        if (targetPos != Vector2.zero)
+        {
+            if (targetDir != playerFacingDirection || anim.GetBool(IdleKey))
             {
-                StartCoroutine(move(targetPos));
-            }
-            else
-            {
-                inputBuffer = move(targetPos);
+                playerFacingDirection = targetDir;
+                string key = getAnimationKey();
+                anim.SetBool(IdleKey, false);
+                anim.SetTrigger(key);
             }
         }
+        else
+        {
+            anim.SetBool(IdleKey, true);
+        }
+
+        rb.velocity = targetPos;
     }
 
-    private IEnumerator move(Vector2 targetPos)
+    private string getAnimationKey()
     {
-        yield return null;
-        Vector2 startingPos = gameObject.transform.position;
-        Vector2 currPos = startingPos;
-        float timeElapsed = 0;
-        while(currPos != targetPos)
+        switch (playerFacingDirection)
         {
-            timeElapsed += Time.deltaTime;
-            currPos = Vector2.Lerp(startingPos, targetPos, timeElapsed / 1.0f);
-            gameObject.transform.position = currPos;
-            yield return null;
-        }
-        if(inputBuffer != null)
-        {
-            StartCoroutine(inputBuffer);
-            inputBuffer = null;
+            case Direction.North:
+                return NorthKey;
+            case Direction.South:
+                return SouthKey;
+            case Direction.East:
+                return EastKey;
+            case Direction.West:
+                return WestKey;
+            default:
+                Debug.LogError("Direction Not Found");
+                return "";
         }
     }
-
 }
