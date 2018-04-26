@@ -16,35 +16,67 @@ public class ReadJson : MonoBehaviour {
     Text t;
     JsonArray values;
     int next = 0;
+    [SerializeField]
+    string fileToRead = "BaseJson.json";
+    float textSpeed = 0.1f;
+    bool coroutineRunning = false;
+
     void Start () {
         jsonFile = new JsonObject();
-        string datapath = Application.dataPath + "/Resources/BaseJson.json";
+        string datapath = Application.dataPath + "/Resources/" + fileToRead;
         jsonFile = JsonReader.ParseFile(datapath);
 
         string json = jsonFile.ToString();
-        Debug.Log(json);
         t = this.GetComponent<Text>();
         values = JsonValue.Parse(json)["dialogue"].AsJsonArray;
-        Debug.Log(values);
-        //t.GetComponent<TextGenerationSettings>();
-        CheckTextOverFlow();
     }
     private void Update()
     {
         //CheckTextOverFlow();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ScrollText();
+            Debug.Log("Update 1 Space");
+            if(!coroutineRunning)
+            {
+                Debug.Log("Update 2 Space");
+                ScrollText();
+            }
         }
     }
+    IEnumerator PrintText(int index)
+    {
+        yield return null;
+        string sentence = values[index];
+        string output = "";
+        foreach (char word in sentence )
+        {
+            output += word;
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("Print now");
+                t.text = sentence;
+            }
+            else
+            {
+                yield return new WaitForSeconds(textSpeed);
+                t.text = output;
+            }
+                     
+        }
+        Debug.Log("Finished Printing");
+        coroutineRunning = false;
+    }
+
     void ScrollText()
     {
         if(next >= values.Count)
         {
             Debug.Log("End of Dialogue");
+            t.text = "";
             return;
         }
-        t.text = values[next];
+        coroutineRunning = true;
+        StartCoroutine(PrintText(next));
         next++;
     }
     bool CheckTextOverFlow()
