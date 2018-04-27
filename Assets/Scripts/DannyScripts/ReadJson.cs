@@ -55,6 +55,8 @@ public class ReadJson : MonoBehaviour {
             {
                 Debug.Log("Print now");
                 t.text = sentence;
+                coroutineRunning = false;
+                yield break;
             }
             else
             {
