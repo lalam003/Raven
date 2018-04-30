@@ -6,8 +6,16 @@ using UnityEngine.UI;
 using LightJson;
 using LightJson.Serialization;
 using System.Reflection;
-
+//Author Danny Diep
 public class ReadJson : MonoBehaviour {
+
+    /* Attach this script to a Text UI object
+     * Specify the text to be loaded in the fileToRead field 
+     * Specify how fast text is printed in textSpeed field
+     * Fastest speed is 0.01f, slow is 0.3f adjust to taste
+     * Files are currently read from Resources folder in Unity Editor
+     * 
+     */
 
 
     // Use this for initialization
@@ -19,7 +27,9 @@ public class ReadJson : MonoBehaviour {
     [SerializeField]
     string fileToRead = "BaseJson.json";
     [SerializeField]
-    float textSpeed = 0.1f;
+    string subsection = "dialogue";
+    [SerializeField]
+    float textSpeed = 0.01f;
     //float slowSpeed = 0.3f;
     //float fastSpeed = 0.01f;
     bool coroutineRunning = false;
@@ -30,8 +40,26 @@ public class ReadJson : MonoBehaviour {
         jsonFile = JsonReader.ParseFile(datapath);
 
         string json = jsonFile.ToString();
-        t = this.GetComponent<Text>();
-        values = JsonValue.Parse(json)["dialogue"].AsJsonArray;
+        t = this.GetComponentInChildren<Text>();
+        values = JsonValue.Parse(json)[subsection].AsJsonArray;
+        ScrollText();
+    }
+    public void Reset()
+    {
+        t.text = "";
+        next = 0;
+    }
+    public void SetParameters(string newFile = "BaseJson.json", string newSubsection = "dialogue")
+    {
+        string datapath = Application.dataPath + "/Resources/" + newFile;
+        jsonFile = JsonReader.ParseFile(datapath);
+        string json = jsonFile.ToString();
+        values = JsonValue.Parse(json)[subsection].AsJsonArray;
+    }
+    private void OnEnable()
+    {
+        Reset();
+        ScrollText();
     }
     private void Update()
     {
@@ -39,7 +67,7 @@ public class ReadJson : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Update 1 Space");
-            if(!coroutineRunning)
+            if(coroutineRunning == false)
             {
                 Debug.Log("Update 2 Space");
                 ScrollText();
@@ -71,18 +99,22 @@ public class ReadJson : MonoBehaviour {
         Debug.Log("Finished Printing");
         coroutineRunning = false;
     }
-
+    
     void ScrollText()
     {
         if(next >= values.Count)
         {
-            Debug.Log("End of Dialogue");
-            t.text = "";
+            Reset();
+            this.gameObject.SetActive(false);
             return;
         }
-        coroutineRunning = true;
-        StartCoroutine(PrintText(next));
-        next++;
+        else
+        {
+            coroutineRunning = true;
+            StartCoroutine(PrintText(next));
+            next++;
+        }
+        
     }
     bool CheckTextOverFlow()
     {
