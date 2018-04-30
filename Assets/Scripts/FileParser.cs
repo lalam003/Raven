@@ -13,7 +13,7 @@ public class FileParser : MonoBehaviour {
         }
         catch(JsonParseException exception)
         {
-
+            Debug.Log("Failed to get json" + exception);
         }
 
         return data;
