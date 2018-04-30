@@ -18,7 +18,10 @@ public class ReadJson : MonoBehaviour {
     int next = 0;
     [SerializeField]
     string fileToRead = "BaseJson.json";
+    [SerializeField]
     float textSpeed = 0.1f;
+    //float slowSpeed = 0.3f;
+    //float fastSpeed = 0.01f;
     bool coroutineRunning = false;
 
     void Start () {
