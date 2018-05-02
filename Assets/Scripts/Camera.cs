@@ -9,9 +9,9 @@ public class Camera : Singleton<Camera>
 
     private IEnumerator currentRoutine;
     
-    public bool MoveCamera(Vector3 position)
+    public bool MoveCamera(Vector2 position)
     {
-        if(currentRoutine != null && !currentRoutine.MoveNext())
+        if((currentRoutine != null && !currentRoutine.MoveNext()) || currentRoutine == null)
         {
             currentRoutine = move(position);
             StartCoroutine(currentRoutine);
@@ -27,7 +27,7 @@ public class Camera : Singleton<Camera>
         Vector3 startPos = transform.position;
         Vector3 currentPos = startPos;
         float curr = 0.0f;
-
+        endPos.z = transform.position.z;
         yield return null;
         while(currentPos != endPos)
         {

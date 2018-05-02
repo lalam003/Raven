@@ -6,13 +6,15 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     [SerializeField]
-    private Vector3 cameraFocalPoint;
+    private Transform cameraFocalPoint;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Coll");
         if(!collision.gameObject.GetComponent<PlayerMovement>().Equals(null))
         {
-            Camera.Instance.MoveCamera(cameraFocalPoint);
+            Debug.Log("Move to " + cameraFocalPoint.position);
+            Camera.Instance.MoveCamera(cameraFocalPoint.position);
         }
     }
 }
