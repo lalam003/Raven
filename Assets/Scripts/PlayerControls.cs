@@ -26,8 +26,8 @@ public class PlayerControls
     {
         North    = KeyCode.W;
         South    = KeyCode.S;
-        East     = KeyCode.A;
-        West     = KeyCode.D;
+        East     = KeyCode.D;
+        West     = KeyCode.A;
         Interact = KeyCode.Space;
     }
 

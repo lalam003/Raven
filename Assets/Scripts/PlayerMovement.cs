@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
@@ -14,6 +15,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private float moveSpeed = 1.0f;
+
+    [SerializeField]
+    private float InteractDistance = 1f;
+    [SerializeField]
+    private int InteractableLayerMask = 8;
 
     private const string NorthKey = "Up";
     private const string SouthKey = "Down";
@@ -36,6 +42,11 @@ public class PlayerMovement : MonoBehaviour
         playerControls = Blackboard.ParseControlMap(new PlayerControls());
     }
 
+    private void Start()
+    {
+        SetInteractDistance();
+    }
+
     private void FixedUpdate()
     {
         Vector2 targetPos = Vector2.zero;
@@ -43,12 +54,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(playerControls.West))
         {
-            targetPos.x += moveSpeed;
+            targetPos.x += (-1f * moveSpeed);
             targetDir = Direction.West;
         }
         if (Input.GetKey(playerControls.East))
         {
-            targetPos.x += (-1f * moveSpeed);
+            targetPos.x += moveSpeed;
             targetDir = Direction.East;
         }
         if (Input.GetKey(playerControls.North))
@@ -60,11 +71,6 @@ public class PlayerMovement : MonoBehaviour
         {
             targetPos.y += (-1f * moveSpeed);
             targetDir = Direction.South;
-        }
-
-        if (Input.GetKey(playerControls.Interact))
-        {
-            //@todo: Implement Interaction here
         }
 
         if (targetPos != Vector2.zero)
@@ -85,6 +91,19 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = targetPos;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(playerControls.Interact))
+        {
+            Interact();
+        }
+    }
+
+    private void SetInteractDistance()
+    {
+        InteractDistance = 1; //GridClass.Instance.GetComponent<Grid>.cellsize.x;
+    }
+
     private string getAnimationKey()
     {
         switch (playerFacingDirection)
@@ -102,4 +121,56 @@ public class PlayerMovement : MonoBehaviour
                 return "";
         }
     }
+    
+    private void Interact()
+    {
+        Vector2 start = transform.position;
+        Vector2 end = start + GetInteractDirection() * InteractDistance;
+
+        int layerMask = 1 << InteractableLayerMask;
+
+        RaycastHit2D[] hitObjects = Physics2D.LinecastAll(start, end, layerMask);
+
+        if (hitObjects.Length > 0)
+        {
+            // Get all objects in front of the player with the layerMask
+            foreach (RaycastHit2D hit in hitObjects)
+            {
+                // Get the first hit object in the list which has an Interactable script and interact with it
+                Interactable hitInteractable = hit.transform.GetComponent<Interactable>();
+                if (hitInteractable)
+                {
+                    hitInteractable.Interact();
+                }
+            }
+        }
+    }
+
+    private Vector2 GetInteractDirection()
+    {
+        switch (playerFacingDirection)
+        {
+            case Direction.North:
+            {
+                return Vector2.up;
+            }
+            case Direction.South:
+            {
+                return Vector2.down;
+            }
+            case Direction.East:
+            {
+                return Vector2.right;
+            }
+            case Direction.West:
+            {
+                return Vector2.left;
+            }
+            default:
+            {
+                return Vector2.down;
+            }
+        }
+    }
+
 }
