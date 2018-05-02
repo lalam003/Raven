@@ -1,80 +1,111 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using LightJson;
+using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
+    private const string filePath = "\\Resouces\\";
 
-    /* Dialogue System attached to interactable objects such as NPCS or anything that need a text box.
-     * OnTriggerStay will only allow interaction if player is within range of object.
-     * Needs testing with overlapping triggers.
-     */
-    private bool isInteracting = false;
+    private JsonArray dialogueText;
+    private IEnumerator routine;
+    private string currentLine;
+    private bool continueDisplay = false;
+
     [SerializeField]
-    private GameObject DialogueBox;
+    private Text dialogueBox;
+    //Text speed in letters per second
     [SerializeField]
-    private string JsonFile, Subsection;
+    private float textSpeed;
 
-
-    private void Start()
+    private bool dialogueRunning = false;
+    public bool DialogueRunning
     {
-        if (DialogueBox == null)
+        get
+        {
+            return dialogueRunning;
+        }
+    }
+
+    private void Awake()
+    {
+        if (dialogueBox == null)
         {
             Debug.LogError("DialogueBox Missing");
         }
     }
 
-
-
-    // Update is called once per frame
-    private void Update ()
+    public void DisplayText(string filename, string key)
     {
-		if(DialogueBox.activeSelf == false)
+        JsonObject file = ReadJson.ParseJsonFile(Application.dataPath + filePath + filename);
+
+        if(file.ContainsKey(key))
         {
-            isInteracting = false;
-        }
-	}
-    //Returns current state of interaction
-    public bool GetStatus()
-    {
-        return isInteracting;
-    }
-    //Specifies which Json and which section to read from
-    private void InjectDialogue()
-    {
-        ReadJson dialogue = DialogueBox.GetComponent<ReadJson>();
-        if(dialogue == null)
-        {
-            Debug.Log("Failed to get Json data");
-
-            return;
+            dialogueText = file[key].AsJsonArray;
         }
         else
         {
-            //Can be called with no arguments but will default to BaseJson.json
-            dialogue.SetParameters(JsonFile, Subsection);
+            Debug.LogError(filename + " does not contain valid keyname " + key);
         }
     }
-    private void OnTriggerStay2D(Collider2D collision)
+
+    public void SetTextSpeed(float lettersPerSecond)
     {
-        if(collision.name == "Player")
+        textSpeed = lettersPerSecond;
+    }
+
+    public bool BreakDialogue()
+    {
+        if(routine.MoveNext())
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            StopCoroutine(routine);
+            dialogueBox.text = currentLine;
+
+            return true;
+        }
+
+        continueDisplay = false;
+        return false;
+    }
+
+    private IEnumerator runDialogue()
+    {
+        dialogueRunning = true;
+        yield return null;
+
+        foreach(JsonValue value in dialogueText)
+        {
+            currentLine = value;
+            routine = printText(currentLine);
+            StartCoroutine(routine);
+            continueDisplay = true;
+            while (routine.MoveNext())
             {
-                if(DialogueBox != null)
-                {
-                    if(DialogueBox.activeSelf == false)
-                    {
-                        InjectDialogue();
-                        DialogueBox.SetActive(true);
-                        isInteracting = true;
-                    }
-                    else
-                    {
-                        Debug.Log("Currently Interacting with another Object");
-                    }
-                }
+                yield return null;
+            }
+            while(continueDisplay)
+            {
+                yield return null;
             }
         }
+
+        dialogueRunning = false;
     }
+
+    private IEnumerator printText(string text)
+    {
+        yield return null;
+
+        WaitForSeconds waitTime = new WaitForSeconds(1.0f / textSpeed);
+        string output = "";
+        foreach (char letter in text)
+        {
+            output += letter;
+            dialogueBox.text = output;
+            yield return waitTime;
+
+        }
+    }
+
+
 }
