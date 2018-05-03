@@ -17,9 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private float moveSpeed = 1.0f;
 
     [SerializeField]
-    private float InteractDistance = 1f;
+    private const float interactDistance = 1f;
     [SerializeField]
-    private int InteractableLayerMask = 8;
+    private const int interactableLayerMask = 8;
 
     private const string NorthKey = "Up";
     private const string SouthKey = "Down";
@@ -40,11 +40,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerControls = Blackboard.ParseControlMap(new PlayerControls());
-    }
-
-    private void Start()
-    {
-        SetInteractDistance();
+        setInteractDistance();
     }
 
     private void FixedUpdate()
@@ -99,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void SetInteractDistance()
+    private void setInteractDistance()
     {
         InteractDistance = 1; //GridClass.Instance.GetComponent<Grid>.cellsize.x;
     }
@@ -125,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     private void Interact()
     {
         Vector2 start = transform.position;
-        Vector2 end = start + GetInteractDirection() * InteractDistance;
+        Vector2 end = start + getInteractDirection() * InteractDistance;
 
         int layerMask = 1 << InteractableLayerMask;
 
@@ -146,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private Vector2 GetInteractDirection()
+    private Vector2 getInteractDirection()
     {
         switch (playerFacingDirection)
         {
