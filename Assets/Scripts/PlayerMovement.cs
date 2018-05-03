@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
             case Direction.West:
                 return WestKey;
             default:
-                Debug.LogError("Direction Not Found");
+                Debug.LogError("Direction type " +playerFacingDirection + " not a valid direction");
                 return "";
         }
     }
