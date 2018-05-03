@@ -1,7 +1,10 @@
 {
-	"menu": [
-		"home",
-		"projects",
-		"about"
-	]
+    "dialogue": [
+        "Thunder and lightning. Enter three Witches",
+        "When shall we three meet again",
+        "In thunder, lightning, or in rain?",
+        "When the hurlyburly's done,",
+        "\"When the battle's lost and won.",
+        "End"
+    ]
 }

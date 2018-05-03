@@ -28,12 +28,10 @@ public class PlayerMovement : MonoBehaviour
     private const string IdleKey = "Idle";
 
     private Direction playerFacingDirection;
-
     private PlayerControls playerControls;
-
     private Animator anim;
-
     private Rigidbody2D rb;
+    public bool CanMove = true;
 
     private void Awake()
     {
@@ -45,46 +43,47 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 targetPos = Vector2.zero;
-        Direction targetDir = playerFacingDirection;
-
-        if (Input.GetKey(playerControls.West))
+        if(CanMove)
         {
-            targetPos.x += (-1f * moveSpeed);
-            targetDir = Direction.West;
-        }
-        if (Input.GetKey(playerControls.East))
-        {
-            targetPos.x += moveSpeed;
-            targetDir = Direction.East;
-        }
-        if (Input.GetKey(playerControls.North))
-        {
-            targetPos.y += moveSpeed;
-            targetDir = Direction.North;
-        }
-        if (Input.GetKey(playerControls.South))
-        {
-            targetPos.y += (-1f * moveSpeed);
-            targetDir = Direction.South;
-        }
-
-        if (targetPos != Vector2.zero)
-        {
-            if (targetDir != playerFacingDirection || anim.GetBool(IdleKey))
+            Vector2 targetPos = Vector2.zero;
+            Direction targetDir = playerFacingDirection;
+            if (Input.GetKey(playerControls.West))
             {
-                playerFacingDirection = targetDir;
-                string key = getAnimationKey();
-                anim.SetBool(IdleKey, false);
-                anim.SetTrigger(key);
+                targetPos.x += (-1f * moveSpeed);
+                targetDir = Direction.West;
             }
-        }
-        else
-        {
-            anim.SetBool(IdleKey, true);
-        }
+            if (Input.GetKey(playerControls.East))
+            {
+                targetPos.x += moveSpeed;
+                targetDir = Direction.East;
+            }
+            if (Input.GetKey(playerControls.North))
+            {
+                targetPos.y += moveSpeed;
+                targetDir = Direction.North;
+            }
+            if (Input.GetKey(playerControls.South))
+            {
+                targetPos.y += (-1f * moveSpeed);
+                targetDir = Direction.South;
+            }
+            if (targetPos != Vector2.zero)
+            {
+                if (targetDir != playerFacingDirection || anim.GetBool(IdleKey))
+                {
+                    playerFacingDirection = targetDir;
+                    string key = getAnimationKey();
+                    anim.SetBool(IdleKey, false);
+                    anim.SetTrigger(key);
+                }
+            }
+            else
+            {
+                anim.SetBool(IdleKey, true);
+            }
 
-        rb.velocity = targetPos;
+            rb.velocity = targetPos;
+        }
     }
 
     private void Update()
