@@ -17,9 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private float moveSpeed = 1.0f;
 
     [SerializeField]
-    private const float interactDistance = 1f;
+    private float interactDistance = 1f;
     [SerializeField]
-    private const int interactableLayerMask = 8;
+    private int interactableLayerMask = 8;
 
     private const string NorthKey = "Up";
     private const string SouthKey = "Down";
@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void setInteractDistance()
     {
-        InteractDistance = 1; //GridClass.Instance.GetComponent<Grid>.cellsize.x;
+        interactDistance = 1; //GridClass.Instance.GetComponent<Grid>.cellsize.x;
     }
 
     private string getAnimationKey()
@@ -121,9 +121,9 @@ public class PlayerMovement : MonoBehaviour
     private void Interact()
     {
         Vector2 start = transform.position;
-        Vector2 end = start + getInteractDirection() * InteractDistance;
+        Vector2 end = start + getInteractDirection() * interactDistance;
 
-        int layerMask = 1 << InteractableLayerMask;
+        int layerMask = 1 << interactableLayerMask;
 
         RaycastHit2D[] hitObjects = Physics2D.LinecastAll(start, end, layerMask);
 
