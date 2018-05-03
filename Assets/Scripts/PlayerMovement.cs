@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
@@ -14,6 +15,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private float moveSpeed = 1.0f;
+
+    [SerializeField]
+    private float interactDistance = 1f;
+    [SerializeField]
+    private const int interactableLayerMask = 8;
 
     private const string NorthKey = "Up";
     private const string SouthKey = "Down";
@@ -32,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerControls = Blackboard.ParseControlMap(new PlayerControls());
+        interactDistance = 1; //GridClass.Instance.GetComponent<Grid>.cellsize.x
     }
 
     private void FixedUpdate()
@@ -40,15 +47,14 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 targetPos = Vector2.zero;
             Direction targetDir = playerFacingDirection;
-
             if (Input.GetKey(playerControls.West))
             {
-                targetPos.x += moveSpeed;
+                targetPos.x += (-1f * moveSpeed);
                 targetDir = Direction.West;
             }
             if (Input.GetKey(playerControls.East))
             {
-                targetPos.x += (-1f * moveSpeed);
+                targetPos.x += moveSpeed;
                 targetDir = Direction.East;
             }
             if (Input.GetKey(playerControls.North))
@@ -61,12 +67,6 @@ public class PlayerMovement : MonoBehaviour
                 targetPos.y += (-1f * moveSpeed);
                 targetDir = Direction.South;
             }
-
-            if (Input.GetKey(playerControls.Interact))
-            {
-                //@todo: Implement Interaction here
-            }
-
             if (targetPos != Vector2.zero)
             {
                 if (targetDir != playerFacingDirection || anim.GetBool(IdleKey))
@@ -86,6 +86,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(playerControls.Interact)) // TODO: && GameState.Instance.IsOverworld())
+        {
+            interact();
+        }
+    }
+
     private string getAnimationKey()
     {
         switch (playerFacingDirection)
@@ -99,8 +107,52 @@ public class PlayerMovement : MonoBehaviour
             case Direction.West:
                 return WestKey;
             default:
-                Debug.LogError("Direction Not Found");
+                Debug.LogError("Direction type " + playerFacingDirection + " not a valid direction");
                 return "";
         }
     }
+    
+    private void interact()
+    {
+        Vector2 start = transform.position;
+        Vector2 end = start + getInteractDirection() * interactDistance;
+
+        int layerMask = 1 << interactableLayerMask;
+
+        RaycastHit2D[] hitObjects = Physics2D.LinecastAll(start, end, layerMask);
+
+        if (hitObjects.Length > 0)
+        {
+            // Get all objects in front of the player with the layerMask
+            foreach (RaycastHit2D hit in hitObjects)
+            {
+                // Get the first hit object in the list which has an Interactable script and interact with it
+                Interactable hitInteractable = hit.transform.GetComponent<Interactable>();
+                if (hitInteractable)
+                {
+                    hitInteractable.Interact();
+                    break;
+                }
+            }
+        }
+    }
+
+    private Vector2 getInteractDirection()
+    {
+        switch (playerFacingDirection)
+        {
+            case Direction.North:
+                return Vector2.up;
+            case Direction.South:
+                return Vector2.down;
+            case Direction.East:
+                return Vector2.right;
+            case Direction.West:
+                return Vector2.left;
+            default:
+                Debug.LogError("Direction type " + playerFacingDirection + " not a valid direction");
+                return Vector2.zero;
+        }
+    }
+
 }
