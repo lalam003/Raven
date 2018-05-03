@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float interactDistance = 1f;
     [SerializeField]
-    private int interactableLayerMask = 8;
+    private const int interactableLayerMask = 8;
 
     private const string NorthKey = "Up";
     private const string SouthKey = "Down";
@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerControls = Blackboard.ParseControlMap(new PlayerControls());
-        setInteractDistance();
+        interactDistance = 1; //GridClass.Instance.GetComponent<Grid>.cellsize.x
     }
 
     private void FixedUpdate()
@@ -89,15 +89,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(playerControls.Interact))
+        if (Input.GetKeyDown(playerControls.Interact)) // TODO: && GameState.Instance.IsOverworld())
         {
-            Interact();
+            interact();
         }
-    }
-
-    private void setInteractDistance()
-    {
-        interactDistance = 1; //GridClass.Instance.GetComponent<Grid>.cellsize.x;
     }
 
     private string getAnimationKey()
@@ -113,12 +108,12 @@ public class PlayerMovement : MonoBehaviour
             case Direction.West:
                 return WestKey;
             default:
-                Debug.LogError("Direction type " +playerFacingDirection + " not a valid direction");
+                Debug.LogError("Direction type " + playerFacingDirection + " not a valid direction");
                 return "";
         }
     }
     
-    private void Interact()
+    private void interact()
     {
         Vector2 start = transform.position;
         Vector2 end = start + getInteractDirection() * interactDistance;
@@ -137,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
                 if (hitInteractable)
                 {
                     hitInteractable.Interact();
+                    break;
                 }
             }
         }
@@ -147,25 +143,16 @@ public class PlayerMovement : MonoBehaviour
         switch (playerFacingDirection)
         {
             case Direction.North:
-            {
                 return Vector2.up;
-            }
             case Direction.South:
-            {
                 return Vector2.down;
-            }
             case Direction.East:
-            {
                 return Vector2.right;
-            }
             case Direction.West:
-            {
                 return Vector2.left;
-            }
             default:
-            {
-                return Vector2.down;
-            }
+                Debug.LogError("Direction type " + playerFacingDirection + " not a valid direction");
+                return Vector2.zero;
         }
     }
 
