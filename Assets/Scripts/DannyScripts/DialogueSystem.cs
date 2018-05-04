@@ -13,7 +13,7 @@ public class DialogueSystem : MonoBehaviour
     private bool continueDisplay = false;
 
     [SerializeField]
-    private Text dialogueBox;
+    private DialogueBox dialogueBox;
     //Text speed in letters per second
     [SerializeField]
     private float textSpeed;
@@ -33,11 +33,6 @@ public class DialogueSystem : MonoBehaviour
         {
             Debug.LogError("DialogueBox Missing");
         }
-        
-    }
-    private void Start()
-    {
-        gameObject.SetActive(false);
     }
 
     public void DisplayText(string filename, string key)
@@ -47,7 +42,6 @@ public class DialogueSystem : MonoBehaviour
         if(file.ContainsKey(key))
         {
             dialogueText = file[key].AsJsonArray;
-            gameObject.SetActive(true);
             StartCoroutine(runDialogue());
         }
         else
@@ -66,7 +60,7 @@ public class DialogueSystem : MonoBehaviour
         if(routine.MoveNext())
         {
             StopCoroutine(routine);
-            dialogueBox.text = currentLine;
+            dialogueBox.SetText(currentLine);
 
             return true;
         }
@@ -77,7 +71,7 @@ public class DialogueSystem : MonoBehaviour
 
     private IEnumerator runDialogue()
     {
-        
+        dialogueBox.gameObject.SetActive(true);
         dialogueRunning = true;
         yield return null;
 
@@ -98,7 +92,7 @@ public class DialogueSystem : MonoBehaviour
         }
 
         dialogueRunning = false;
-        gameObject.SetActive(false);
+        dialogueBox.gameObject.SetActive(false);
     }
 
     private IEnumerator printText(string text)
@@ -110,7 +104,7 @@ public class DialogueSystem : MonoBehaviour
         foreach (char letter in text)
         {
             output += letter;
-            dialogueBox.text = output;
+            dialogueBox.SetText(output);
             yield return waitTime;
 
         }

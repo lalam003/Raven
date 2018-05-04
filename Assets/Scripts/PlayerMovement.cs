@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 targetPos = Vector2.zero;
             Direction targetDir = playerFacingDirection;
+
             if (Input.GetKey(playerControls.West))
             {
                 targetPos.x += (-1f * moveSpeed);
@@ -67,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
                 targetPos.y += (-1f * moveSpeed);
                 targetDir = Direction.South;
             }
+
             if (targetPos != Vector2.zero)
             {
                 if (targetDir != playerFacingDirection || anim.GetBool(IdleKey))
@@ -111,24 +113,9 @@ public class PlayerMovement : MonoBehaviour
                 return "";
         }
     }
-    //Stores a reference to the most recently interacted object
-    [SerializeField]
-    private Interactable currentInteractable;
+
     private void interact()
-    {
-        if(currentInteractable == null)
-        {
-            
-        }
-        else if (currentInteractable.gameObject.GetComponentInChildren<DialogueSystem>() != null)
-        {
-            if (currentInteractable.gameObject.GetComponentInChildren<DialogueSystem>().DialogueRunning == true)
-            {
-                currentInteractable.gameObject.GetComponentInChildren<DialogueSystem>().BreakDialogue();
-                return;
-            }
-        }
-        
+    {   
         Vector2 start = transform.position;
         Vector2 end = start + getInteractDirection() * interactDistance;
         int layerMask = 1 << interactableLayerMask;
@@ -142,10 +129,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Get the first hit object in the list which has an Interactable script and interact with it
                 Interactable hitInteractable = hit.transform.GetComponent<Interactable>();
+
                 if (hitInteractable)
                 {
                     hitInteractable.Interact();
-                    currentInteractable = hitInteractable;
                     break;
                 }
             }
