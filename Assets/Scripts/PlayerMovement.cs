@@ -111,12 +111,26 @@ public class PlayerMovement : MonoBehaviour
                 return "";
         }
     }
-    
+    //Stores a reference to the most recently interacted object
+    [SerializeField]
+    private Interactable currentInteractable;
     private void interact()
     {
+        if(currentInteractable == null)
+        {
+            
+        }
+        else if (currentInteractable.gameObject.GetComponentInChildren<DialogueSystem>() != null)
+        {
+            if (currentInteractable.gameObject.GetComponentInChildren<DialogueSystem>().DialogueRunning == true)
+            {
+                currentInteractable.gameObject.GetComponentInChildren<DialogueSystem>().BreakDialogue();
+                return;
+            }
+        }
+        
         Vector2 start = transform.position;
         Vector2 end = start + getInteractDirection() * interactDistance;
-
         int layerMask = 1 << interactableLayerMask;
 
         RaycastHit2D[] hitObjects = Physics2D.LinecastAll(start, end, layerMask);
@@ -131,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
                 if (hitInteractable)
                 {
                     hitInteractable.Interact();
+                    currentInteractable = hitInteractable;
                     break;
                 }
             }

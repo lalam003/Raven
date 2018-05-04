@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
-    private const string filePath = "\\Resouces\\";
+    private const string filePath = "/Resources/";
 
     private JsonArray dialogueText;
     private IEnumerator routine;
@@ -33,6 +33,11 @@ public class DialogueSystem : MonoBehaviour
         {
             Debug.LogError("DialogueBox Missing");
         }
+        
+    }
+    private void Start()
+    {
+        gameObject.SetActive(false);
     }
 
     public void DisplayText(string filename, string key)
@@ -42,6 +47,8 @@ public class DialogueSystem : MonoBehaviour
         if(file.ContainsKey(key))
         {
             dialogueText = file[key].AsJsonArray;
+            gameObject.SetActive(true);
+            StartCoroutine(runDialogue());
         }
         else
         {
@@ -70,6 +77,7 @@ public class DialogueSystem : MonoBehaviour
 
     private IEnumerator runDialogue()
     {
+        
         dialogueRunning = true;
         yield return null;
 
@@ -90,6 +98,7 @@ public class DialogueSystem : MonoBehaviour
         }
 
         dialogueRunning = false;
+        gameObject.SetActive(false);
     }
 
     private IEnumerator printText(string text)
