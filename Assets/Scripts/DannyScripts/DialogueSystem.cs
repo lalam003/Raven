@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
-    private const string filePath = "\\Resouces\\";
+    private const string filePath = "/Resources/";
 
     private JsonArray dialogueText;
     private IEnumerator routine;
@@ -13,7 +13,7 @@ public class DialogueSystem : MonoBehaviour
     private bool continueDisplay = false;
 
     [SerializeField]
-    private Text dialogueBox;
+    private DialogueBox dialogueBox;
     //Text speed in letters per second
     [SerializeField]
     private float textSpeed;
@@ -42,6 +42,7 @@ public class DialogueSystem : MonoBehaviour
         if(file.ContainsKey(key))
         {
             dialogueText = file[key].AsJsonArray;
+            StartCoroutine(runDialogue());
         }
         else
         {
@@ -59,7 +60,7 @@ public class DialogueSystem : MonoBehaviour
         if(routine.MoveNext())
         {
             StopCoroutine(routine);
-            dialogueBox.text = currentLine;
+            dialogueBox.SetText(currentLine);
 
             return true;
         }
@@ -70,6 +71,7 @@ public class DialogueSystem : MonoBehaviour
 
     private IEnumerator runDialogue()
     {
+        dialogueBox.gameObject.SetActive(true);
         dialogueRunning = true;
         yield return null;
 
@@ -90,6 +92,7 @@ public class DialogueSystem : MonoBehaviour
         }
 
         dialogueRunning = false;
+        dialogueBox.gameObject.SetActive(false);
     }
 
     private IEnumerator printText(string text)
@@ -101,7 +104,7 @@ public class DialogueSystem : MonoBehaviour
         foreach (char letter in text)
         {
             output += letter;
-            dialogueBox.text = output;
+            dialogueBox.SetText(output);
             yield return waitTime;
 
         }

@@ -1,30 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-// TODO: Make a Singleton
-public class GameState : MonoBehaviour
+﻿public class GameState : Singleton<GameState>
 {
-    public enum States { Overworld, Menu, Dialogue, Cutscene };
+    public enum States {
+        Overworld = 0,
+        Menu,
+        Dialogue,
+        Cutscene };
 
+    private States state;
     public States State
     {
         get
         {
             return state;
         }
-
-        set
-        {
-
-        }
     }
-    private States state;
 
     private void Awake()
     {
         // Set initial state
-        State = States.Overworld;
+        state = States.Overworld;
     }
 
     /// <summary>
@@ -81,25 +75,5 @@ public class GameState : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    public bool IsOverworld()
-    {
-        return (state == States.Overworld);
-    }
-
-    public bool IsMenu()
-    {
-        return (state == States.Menu);
-    }
-
-    public bool IsDialogue()
-    {
-        return (state == States.Dialogue);
-    }
-
-    public bool IsCutscene()
-    {
-        return (state == States.Cutscene);
     }
 }
