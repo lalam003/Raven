@@ -6,7 +6,7 @@ public class TimeSystem  {
 
     private static int timeElapsed = 0;
     delegate void OnInteract();
-    public static void IncrementTime(int timeAdvanced)
+    public void IncrementTime(int timeAdvanced)
     {
         timeElapsed += timeAdvanced;
     }
