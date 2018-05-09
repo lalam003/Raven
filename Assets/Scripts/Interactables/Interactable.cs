@@ -2,8 +2,8 @@
 
 public abstract class Interactable : MonoBehaviour
 {
-    private static Callback onInteract;
-    public static Callback OnInteract
+    private Callback onInteract;
+    public Callback OnInteract
     {
         get
         {

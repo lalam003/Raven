@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using LightJson;
-using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {

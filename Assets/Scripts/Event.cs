@@ -13,5 +13,19 @@ public class Event : ScriptableObject
     private EventType type;
 
     [SerializeField]
+    private int timeToTrigger;
+
+    [SerializeField]
+    private Interactable interactable;
+
+    [SerializeField]
+    private Trigger trigger;
+
+    [SerializeField]
     private EventTask task;
+
+    public void TriggerTask()
+    {
+        task.ExecuteTask();
+    }
 }
