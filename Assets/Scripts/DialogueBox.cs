@@ -8,7 +8,6 @@ public class DialogueBox : MonoBehaviour
     private void Awake()
     {
         dialogueText = GetComponentInChildren<Text>();
-        
         if(dialogueText == null)
         {
             Debug.LogError("Error No DialogueText detected, creating new Text");

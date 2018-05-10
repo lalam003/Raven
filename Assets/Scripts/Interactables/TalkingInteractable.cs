@@ -6,12 +6,13 @@ public class TalkingInteractable : Interactable
     private DialogueSystem dialogueSystem;
     protected const string fileName = "BaseJson.json";
     protected const string keyName = "dialogue";
-
+    public Event eventType;
     private void Awake()
     {
         dialogueSystem = GetComponentInChildren<DialogueSystem>();
+        
     }
-
+    
     public override void Interact()
     {
         if (dialogueSystem.DialogueRunning)
@@ -22,5 +23,6 @@ public class TalkingInteractable : Interactable
         {
             dialogueSystem.DisplayText(fileName, keyName);
         }
+        eventType.TriggerTask();
     }
 }
