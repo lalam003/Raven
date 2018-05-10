@@ -8,7 +8,7 @@ public class EventSystem : MonoBehaviour
 
     private void Awake()
     {
-        //events = new List<Event>();
+        //  events = new List<Event>();
     }
     public void TriggerEvent(int index)
     {
