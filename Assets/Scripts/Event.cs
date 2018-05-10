@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Event : ScriptableObject
+class Event : MonoBehaviour
 {
     public enum EventType
     {

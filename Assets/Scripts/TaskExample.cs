@@ -9,6 +9,7 @@ public class TaskExample : EventTask {
     {
         //throw new System.NotImplementedException();
         Debug.Log("Doing Some Task");
+        Debug.Log(gameObject.name);
         this.GetComponent<Text>().text = "Event Triggered";
     }
 }

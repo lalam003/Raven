@@ -6,7 +6,6 @@ public class TalkingInteractable : Interactable
     private DialogueSystem dialogueSystem;
     protected const string fileName = "BaseJson.json";
     protected const string keyName = "dialogue";
-    public Event eventType;
     private void Awake()
     {
         dialogueSystem = GetComponentInChildren<DialogueSystem>();
@@ -22,7 +21,7 @@ public class TalkingInteractable : Interactable
         else
         {
             dialogueSystem.DisplayText(fileName, keyName);
+            ESys.TriggerEvent(0);
         }
-        eventType.TriggerTask();
     }
 }

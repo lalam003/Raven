@@ -33,12 +33,5 @@ public class MenuAddons {
         }
         UnityEditor.AssetDatabase.Refresh();
     }
-    [MenuItem("Assets/Create/Create Event")]
-    public static Event Create()
-    {
-        Event asset = ScriptableObject.CreateInstance<Event>();
-        AssetDatabase.CreateAsset(asset, "Assets/Event.asset");
-        AssetDatabase.SaveAssets();
-        return asset;
-    }
+    
 }

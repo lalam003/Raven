@@ -2,6 +2,8 @@
 
 public abstract class Interactable : MonoBehaviour
 {
+    
+    public EventSystem ESys;
     private Callback onInteract;
     public Callback OnInteract
     {
