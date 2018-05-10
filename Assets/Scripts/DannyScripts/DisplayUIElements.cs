@@ -16,6 +16,6 @@ public class DisplayUIElements : MonoBehaviour {
 	
 	// Update is called once per frame
 	private void Update () {
-        timeDisplay.text = timeSys.GetTime().ToString();
+        timeDisplay.text = "Time Elapsed: " + timeSys.GetTime().ToString();
 	}
 }
