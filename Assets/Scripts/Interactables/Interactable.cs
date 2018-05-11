@@ -2,8 +2,6 @@
 
 public abstract class Interactable : MonoBehaviour
 {
-    
-    public EventSystem ESys;
     private Callback onInteract;
     public Callback OnInteract
     {
@@ -25,6 +23,11 @@ public abstract class Interactable : MonoBehaviour
     }
 
     public abstract void Interact();
+
+    private void Awake()
+    {
+        OnInteract += TimeSystem.IncrementTime;
+    }
 }
 
 public delegate void Callback();

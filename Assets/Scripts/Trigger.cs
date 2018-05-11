@@ -2,19 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    private void OnTriggerEnter2D(Collider2D collision)
+public class Trigger : MonoBehaviour
+{
+    private Callback onTrigger;
+    public Callback OnTrigger
     {
-        this.GetComponent<Event>().TriggerTask();
+        get
+        {
+            return onTrigger;
+        }
+        set
+        {
+            if(value != null)
+            {
+                onTrigger = value;
+            }
+            else
+            {
+                onTrigger = () => { };
+            }
+        }
     }
 }

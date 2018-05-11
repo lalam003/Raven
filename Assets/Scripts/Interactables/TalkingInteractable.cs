@@ -22,7 +22,6 @@ public class TalkingInteractable : Interactable
         else
         {
             dialogueSystem.DisplayText(fileName, keyName);
-            ESys.TriggerEvent(0);
         }
     }
 }
