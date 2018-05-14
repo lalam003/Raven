@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05e6dda33fc07d44827e09766caf421, type: 3}
+  m_Name: WaterBottle
+  m_EditorClassIdentifier: 
+  isNote: 0
+  sprite: {fileID: 21300000, guid: 63c96b16f854a2d44b07f2d541606c36, type: 3}
+  maxAmount: 5
+  description: Ahh refreshing water from the fountain to beat the heat.

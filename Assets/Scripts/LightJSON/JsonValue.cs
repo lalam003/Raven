@@ -1,13 +1,13 @@
+using LightJson.Serialization;
 using System;
 using System.Diagnostics;
-using LightJson.Serialization;
 
 namespace LightJson
 {
-	/// <summary>
-	/// A wrapper object that contains a valid JSON value.
-	/// </summary>
-	[DebuggerDisplay("{ToString(),nq}", Type = "JsonValue({Type})")]
+    /// <summary>
+    /// A wrapper object that contains a valid JSON value.
+    /// </summary>
+    [DebuggerDisplay("{ToString(),nq}", Type = "JsonValue({Type})")]
 	[DebuggerTypeProxy(typeof(JsonValueDebugView))]
 	public struct JsonValue
 	{
