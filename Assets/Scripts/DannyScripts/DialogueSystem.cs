@@ -1,7 +1,6 @@
-﻿using System.Collections;
+﻿using LightJson;
+using System.Collections;
 using UnityEngine;
-using LightJson;
-using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -42,6 +41,10 @@ public class DialogueSystem : MonoBehaviour
         if(file.ContainsKey(key))
         {
             dialogueText = file[key].AsJsonArray;
+            Blackboard.Menu.gameObject.SetActive(false); // In case of a bug dialogue has priority
+            Blackboard.Menu.canOpen = false;
+            Blackboard.Player.CanMove = false;
+            dialogueRunning = true;
             StartCoroutine(runDialogue());
         }
         else
@@ -72,7 +75,6 @@ public class DialogueSystem : MonoBehaviour
     private IEnumerator runDialogue()
     {
         dialogueBox.gameObject.SetActive(true);
-        dialogueRunning = true;
         yield return null;
 
         foreach(JsonValue value in dialogueText)
@@ -91,8 +93,10 @@ public class DialogueSystem : MonoBehaviour
             }
         }
 
-        dialogueRunning = false;
         dialogueBox.gameObject.SetActive(false);
+        dialogueRunning = false;
+        Blackboard.Menu.canOpen = true;
+        Blackboard.Player.CanMove = true;
     }
 
     private IEnumerator printText(string text)

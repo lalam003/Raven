@@ -1,14 +1,13 @@
-using System;
+using LightJson.Serialization;
 using System.Collections.Generic;
 using System.Diagnostics;
-using LightJson.Serialization;
 
 namespace LightJson
 {
-	/// <summary>
-	/// Represents an ordered collection of JsonValues.
-	/// </summary>
-	[DebuggerDisplay("Count = {Count}")]
+    /// <summary>
+    /// Represents an ordered collection of JsonValues.
+    /// </summary>
+    [DebuggerDisplay("Count = {Count}")]
 	[DebuggerTypeProxy(typeof(JsonArrayDebugView))]
 	public sealed class JsonArray : IEnumerable<JsonValue>
 	{
