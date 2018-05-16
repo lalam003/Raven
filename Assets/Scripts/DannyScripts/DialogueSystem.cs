@@ -1,6 +1,6 @@
-﻿using LightJson;
 using System.Collections;
 using UnityEngine;
+using LightJson;
 
 public class DialogueSystem : MonoBehaviour
 {
