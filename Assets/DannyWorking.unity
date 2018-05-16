@@ -288,11 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee523e52f0be62f438a85f842d83bf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  timeToTrigger: 0
-  interactable: {fileID: 1053596772}
-  trigger: {fileID: 0}
-  task: {fileID: 717451317}
 --- !u!114 &717451317 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114620198668623800, guid: b336d049c9fa67640a9bbfccda65e91c,
@@ -531,12 +526,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransitionSpeed: 1
---- !u!114 &1053596772 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114823748646714030, guid: 6b263a0a765786a488304abb067d64b0,
-    type: 2}
-  m_PrefabInternal: {fileID: 1725967748}
-  m_Script: {fileID: 11500000, guid: 37ed10f0d15bcd14897c0bbae39edb58, type: 3}
 --- !u!1001 &1207575662
 Prefab:
   m_ObjectHideFlags: 0
@@ -893,8 +882,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c134849f8ca734e91469c46673c671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  events:
-  - {fileID: 717451316}
 --- !u!4 &1873399290
 Transform:
   m_ObjectHideFlags: 0
@@ -917,9 +904,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2044568660}
   - component: {fileID: 2044568659}
-  - component: {fileID: 2044568658}
   - component: {fileID: 2044568661}
   - component: {fileID: 2044568662}
+  - component: {fileID: 2044568663}
+  - component: {fileID: 2044568658}
   m_Layer: 5
   m_Name: WalkTrigger
   m_TagString: Untagged
@@ -935,9 +923,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2044568657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6515300cece69d4d9accc98212501d8, type: 3}
+  m_Script: {fileID: 11500000, guid: fb7ba37fbccaf5c48a3830f5a3edb775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  task: {fileID: 717451317}
 --- !u!114 &2044568659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -949,11 +938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee523e52f0be62f438a85f842d83bf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  timeToTrigger: 0
-  interactable: {fileID: 1053596772}
-  trigger: {fileID: 2044568658}
-  task: {fileID: 717451317}
 --- !u!224 &2044568660
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1041,3 +1025,14 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &2044568663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2044568657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6515300cece69d4d9accc98212501d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
