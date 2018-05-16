@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(Inventory))]
 public class PlayerMovement : MonoBehaviour
 {
     private enum Direction
@@ -29,7 +29,21 @@ public class PlayerMovement : MonoBehaviour
     private PlayerControls playerControls;
     private Animator anim;
     private Rigidbody2D rb;
-    public bool CanMove = true;
+    private bool canMove = true;
+    public bool CanMove
+    {
+        get
+        {
+            return canMove;
+        }
+
+        set
+        {
+            rb.velocity = Vector2.zero;
+            anim.SetBool(IdleKey, true);
+            canMove = value;
+        }
+    }
 
     private void Awake()
     {
@@ -37,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         playerControls = Blackboard.ParseControlMap(new PlayerControls());
         interactDistance = 1; //GridClass.Instance.GetComponent<Grid>.cellsize.x
+        Blackboard.Player = this;
     }
 
     private void FixedUpdate()
@@ -88,9 +103,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(playerControls.Interact)) // TODO: && GameState.Instance.IsOverworld())
+        if (CanMove)
         {
-            interact();
+            if (Input.GetKeyDown(playerControls.Interact))
+            {
+                if (interact())
+                {
+                    Blackboard.advanceTime();
+                }
+            }
+            if (Input.GetKeyDown(playerControls.Menu))
+            {
+                if (!Blackboard.Menu.gameObject.activeSelf)
+                {
+                    Blackboard.Menu.gameObject.SetActive(true);
+                }
+            }
         }
     }
 
@@ -112,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void interact()
+    private bool interact()
     {   
         Vector2 start = transform.position;
         Vector2 end = start + getInteractDirection() * interactDistance;
@@ -131,10 +159,11 @@ public class PlayerMovement : MonoBehaviour
                 if (hitInteractable)
                 {
                     hitInteractable.Interact();
-                    break;
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     private Vector2 getInteractDirection()

@@ -8,7 +8,8 @@ public class PlayerControls
         South,
         East,
         West,
-        Interact
+        Interact,
+        Menu
     }
 
     public KeyCode North { get; private set; }
@@ -16,6 +17,7 @@ public class PlayerControls
     public KeyCode East { get; private set; }
     public KeyCode West { get; private set; }
     public KeyCode Interact { get; private set; }
+    public KeyCode Menu { get; private set; }
 
     public PlayerControls()
     {
@@ -29,6 +31,7 @@ public class PlayerControls
         East     = KeyCode.D;
         West     = KeyCode.A;
         Interact = KeyCode.Space;
+        Menu     = KeyCode.Escape;
     }
 
     public void SetKey(Controls control, KeyCode newInput)
@@ -50,7 +53,11 @@ public class PlayerControls
             case Controls.Interact:
                 Interact = newInput;
                 break;
+            case Controls.Menu:
+                Menu = newInput;
+                break;
             default:
+                Debug.LogWarning("Control " + control + " not recognized.");
                 break;
         }
     }

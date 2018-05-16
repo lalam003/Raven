@@ -1,11 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
-using UnityEngine.UI;
-using LightJson;
+﻿using LightJson;
 using LightJson.Serialization;
-using System.Reflection;
+using UnityEngine;
 //Author Danny Diep
 public class ReadJson : MonoBehaviour
 {

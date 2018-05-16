@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Globalization;
 
 namespace LightJson.Serialization
 {
-	using ErrorType = JsonParseException.ErrorType;
+    using ErrorType = JsonParseException.ErrorType;
 
-	/// <summary>
-	/// Represents a reader that can read JsonValues.
-	/// </summary>
-	public sealed class JsonReader
+    /// <summary>
+    /// Represents a reader that can read JsonValues.
+    /// </summary>
+    public sealed class JsonReader
 	{
 		private TextScanner scanner;
 
