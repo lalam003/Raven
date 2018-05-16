@@ -58,7 +58,7 @@ public class MainMenu : MenuBase
             itemSprite.sprite = clickedItem.Sprite;
             itemDescription.text = clickedItem.Description;
         }
-        gameManager.PlayAudio(menuSelect);
+        audioManager.PlayAudio(menuSelect);
     }
 
     protected override void Awake()
@@ -77,7 +77,7 @@ public class MainMenu : MenuBase
         clearListText(menuColumns[1].innerList);
         clearQty();
         currentText.color = selectedColor;
-        gameManager.PlayAudio(menuOpen);
+        audioManager.PlayAudio(menuOpen);
     }
 
      protected override void Update()
@@ -89,14 +89,16 @@ public class MainMenu : MenuBase
 
     private void updateClockHands()
     {
-        clockHourHand.localRotation = Quaternion.Euler(0, 0, -360 * Blackboard.hour / 12);
-        clockMinuteHand.localRotation = Quaternion.Euler(0, 0, -360 * Blackboard.minute / 60);
+        clockHourHand.localRotation = Quaternion.Euler(0, 0, -360 * TimeSystem.Hour / 12);
+        clockMinuteHand.localRotation = Quaternion.Euler(0, 0, -360 * TimeSystem.Minute / 60);
     }
 
     private void updateClockDigital()
     {
-        dateText.text = Blackboard.month.ToString() + '\n' + Blackboard.day;
-        clockDigital.text = Blackboard.hour + ":" + ((int) Blackboard.minute) + ((Blackboard.isMorning) ? "am" : "pm");
+        dateText.text = TimeSystem.Month.ToString() + '\n' + TimeSystem.Day.ToString();
+        clockDigital.text = TimeSystem.Hour + ":" 
+            + (TimeSystem.Minute < 10 ? "0" + TimeSystem.Minute : TimeSystem.Minute.ToString()) 
+            + ((TimeSystem.isMorning) ? "am" : "pm");
     }
 
     protected override void toggleMenuDown()
@@ -106,11 +108,11 @@ public class MainMenu : MenuBase
             currentText.color = unselectedColor;
             row++;
             currentText.color = selectedColor;
-            gameManager.PlayAudio(menuToggle);
+            audioManager.PlayAudio(menuToggle);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -131,11 +133,11 @@ public class MainMenu : MenuBase
             currentText.color = selectedColor;
             menuListLength = currentList.Count;
             clearItemDisplay();
-            gameManager.PlayAudio(menuToggle);
+            audioManager.PlayAudio(menuToggle);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -154,11 +156,11 @@ public class MainMenu : MenuBase
             row = 0;
             currentText.color = selectedColor;
             displaySubmenu();
-            gameManager.PlayAudio(menuSelect);
+            audioManager.PlayAudio(menuSelect);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -166,7 +168,7 @@ public class MainMenu : MenuBase
     {
         resetScrollPosition();
         clearItemDisplay();
-        gameManager.PlayAudio(menuClose);
+        audioManager.PlayAudio(menuClose);
         base.closeMenu();
     }
 
