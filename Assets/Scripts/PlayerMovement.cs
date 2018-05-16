@@ -107,10 +107,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(playerControls.Interact))
             {
-                if (interact())
-                {
-                    Blackboard.advanceTime();
-                }
+                interact();
             }
             if (Input.GetKeyDown(playerControls.Menu))
             {

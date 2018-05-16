@@ -35,7 +35,7 @@ public abstract class MenuBase : MonoBehaviour
     [SerializeField]
     protected AudioClip menuClose;
     [SerializeField]
-    protected GameManager gameManager;
+    protected AudioManager audioManager;
 
     // Internal variables
     [SerializeField, Tooltip("Set a size for columns then drag and drop menu Text objects that the user can scroll through.")]
@@ -132,11 +132,11 @@ public abstract class MenuBase : MonoBehaviour
             currentText.color = unselectedColor;
             row--;
             currentText.color = selectedColor;
-            gameManager.PlayAudio(menuToggle);
+            audioManager.PlayAudio(menuToggle);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -147,11 +147,11 @@ public abstract class MenuBase : MonoBehaviour
             currentText.color = unselectedColor;
             row++;
             currentText.color = selectedColor;
-            gameManager.PlayAudio(menuToggle);
+            audioManager.PlayAudio(menuToggle);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -166,11 +166,11 @@ public abstract class MenuBase : MonoBehaviour
             col++;
             row = 0;
             currentText.color = selectedColor;
-            gameManager.PlayAudio(menuToggle);
+            audioManager.PlayAudio(menuToggle);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -186,11 +186,11 @@ public abstract class MenuBase : MonoBehaviour
                 t.color = unselectedColor;
             }
             currentText.color = selectedColor;
-            gameManager.PlayAudio(menuToggle);
+            audioManager.PlayAudio(menuToggle);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -199,6 +199,15 @@ public abstract class MenuBase : MonoBehaviour
         resetAllTextColor();
         gameObject.SetActive(false);
         Blackboard.Player.CanMove = true;
+    }
+
+    public void Quit()
+    {
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
     }
 
     /// <summary>
