@@ -5,8 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
+    [SerializeField]
     public static PlayerData currentPlayer;
-    public Transform currentPosition;
+    public Vector3 currentPosition;
+    [SerializeField]
     public Inventory currentInventory;
     //Itemdata
     //Events
