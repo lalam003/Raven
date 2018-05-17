@@ -37,19 +37,13 @@ public static class SaveLoad
     }
 
     //Deletes saves, untested
-    public static void DeleteSave(PlayerData player, string filename)
+    public static void DeleteSave(string filename)
     {
         string dataPath = Application.persistentDataPath + "/" + filename + ".json";
         if (File.Exists(dataPath))
         {
             File.Delete(dataPath);
-            foreach(PlayerData p in saveData)
-            {
-                if(p == player)
-                {
-                    saveData.Remove(p);
-                }
-            }
+            
         }
     }
 }

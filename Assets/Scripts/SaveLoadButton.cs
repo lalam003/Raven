@@ -30,4 +30,9 @@ public class SaveLoadButton : MonoBehaviour {
         Player.transform.position = dataToLoad.currentPosition;
         Debug.Log(SaveLoad.loadData.currentPosition);
     }
+    public void Delete()
+    {
+        Debug.Log("Deleting Game");
+        SaveLoad.DeleteSave("player.json");
+    }
 }
