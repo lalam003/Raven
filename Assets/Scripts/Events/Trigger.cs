@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
@@ -22,5 +20,10 @@ public class Trigger : MonoBehaviour
                 onTrigger = () => { };
             }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        OnTrigger();
     }
 }
