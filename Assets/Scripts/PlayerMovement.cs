@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(Inventory))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
     private enum Direction
@@ -51,7 +51,6 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         playerControls = Blackboard.ParseControlMap(new PlayerControls());
         interactDistance = 1; //GridClass.Instance.GetComponent<Grid>.cellsize.x
-        Blackboard.Player = this;
     }
 
     private void FixedUpdate()

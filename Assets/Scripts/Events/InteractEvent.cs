@@ -10,5 +10,6 @@ public class InteractEvent : Event
     {
         interactable = GetComponent<Interactable>();
         interactable.OnInteract += task.ExecuteTask;
+        interactable.OnInteract += () => { interactable.OnInteract -= task.ExecuteTask; };
     }
 }

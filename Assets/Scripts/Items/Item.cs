@@ -4,6 +4,16 @@
 public class Item : ScriptableObject
 {
     [SerializeField]
+    private string itemKey = "";
+    public string ItemKey
+    {
+        get
+        {
+            return itemKey;
+        }
+    }
+
+    [SerializeField]
     private bool isNote = false;
     public bool IsNote
     {
