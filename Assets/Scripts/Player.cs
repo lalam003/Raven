@@ -14,27 +14,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool CanMove
-    {
-        get
-        {
-            return playerMovement.CanMove;
-        }
-        set
-        {
-            playerMovement.CanMove = value;
-        }
-    }
-
     [SerializeField]
     private Transform respawn;
 
-    private PlayerMovement playerMovement;
+    public PlayerMovement PlayerMovement;
 
     private void Awake()
     {
         Blackboard.Player = this;
-        playerMovement = GetComponent<PlayerMovement>();
+        PlayerMovement = GetComponent<PlayerMovement>();
     }
 
     public void PlayerDeath()

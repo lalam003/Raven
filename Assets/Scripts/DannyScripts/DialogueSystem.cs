@@ -43,7 +43,7 @@ public class DialogueSystem : MonoBehaviour
             dialogueText = file[key].AsJsonArray;
             Blackboard.Menu.gameObject.SetActive(false); // In case of a bug dialogue has priority
             Blackboard.Menu.canOpen = false;
-            Blackboard.Player.CanMove = false;
+            Blackboard.Player.PlayerMovement.CanMove = false;
             dialogueRunning = true;
             StartCoroutine(runDialogue());
         }
@@ -96,7 +96,7 @@ public class DialogueSystem : MonoBehaviour
         dialogueBox.gameObject.SetActive(false);
         dialogueRunning = false;
         Blackboard.Menu.canOpen = true;
-        Blackboard.Player.CanMove = true;
+        Blackboard.Player.PlayerMovement.CanMove = true;
     }
 
     private IEnumerator printText(string text)

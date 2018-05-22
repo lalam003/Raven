@@ -1,26 +1,69 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     private Dictionary<string, AudioClip> audioDict = new Dictionary<string, AudioClip>();
-    public AudioSource audioSource;
+    public AudioSource AudioSource;
+    public float Volume;
+    private IEnumerator routine;
+    private const float scrollDelay = .5f;
+    private const float volumeDecayRate = .05f;
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        AudioSource = GetComponent<AudioSource>();
         loadAudio();
     }
 
     public void AdjustVolume()
     {
-        Debug.Log("Adjust volume feature not implemented yet.");
+        Blackboard.Player.PlayerMovement.Up =    () => { return Vector2.zero; };
+        Blackboard.Player.PlayerMovement.Down =  () => { return Vector2.zero; };
+        Blackboard.Player.PlayerMovement.Right = () => 
+        {
+            if (routine == null || !routine.MoveNext())
+            {
+                raiseVolume();
+                routine = PlayerMovement.HeldKeyStart(Blackboard.ControlMap.East, raiseVolume, scrollDelay);
+                StartCoroutine(routine);
+            }
+
+            return Vector2.zero;
+        };
+
+        Blackboard.Player.PlayerMovement.Left = () =>
+        {
+            if (routine == null || !routine.MoveNext())
+            {
+                lowerVolume();
+                routine = PlayerMovement.HeldKeyStart(Blackboard.ControlMap.West, lowerVolume, scrollDelay);
+                StartCoroutine(routine);
+            }
+
+            return Vector2.zero;
+        };
+
+        Blackboard.Player.PlayerMovement.Menu = Blackboard.Menu.SetMenuInput;
+    }
+
+    private void lowerVolume()
+    {
+        AudioSource.volume -= volumeDecayRate;
+        AudioSource.volume = Mathf.Clamp01(AudioSource.volume);
+    }
+
+    private void raiseVolume()
+    {
+        AudioSource.volume += volumeDecayRate;
+        AudioSource.volume = Mathf.Clamp01(AudioSource.volume);
     }
 
     public void PlayAudio(AudioClip clip)
     {
-        audioSource.clip = clip;
-        audioSource.Play();
+        AudioSource.clip = clip;
+        AudioSource.Play();
     }
 
     private void loadAudio()
