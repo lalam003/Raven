@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
     private Dictionary<string, AudioClip> audioDict = new Dictionary<string, AudioClip>();
     public AudioSource AudioSource;
-    public float Volume;
     private IEnumerator routine;
     private const float scrollDelay = .5f;
     private const float volumeDecayRate = .05f;
+
+    [SerializeField]
+    private Slider audioSlider;
 
     private void Awake()
     {
@@ -45,19 +48,28 @@ public class AudioManager : MonoBehaviour
             return Vector2.zero;
         };
 
-        Blackboard.Player.PlayerMovement.Menu = Blackboard.Menu.SetMenuInput;
+        Blackboard.Player.PlayerMovement.Menu = () =>
+        {
+            audioSlider.gameObject.SetActive(false);
+            Blackboard.Menu.SetMenuInput();
+        };
+
+        audioSlider.value = AudioSource.volume;
+        audioSlider.gameObject.SetActive(true);
     }
 
     private void lowerVolume()
     {
         AudioSource.volume -= volumeDecayRate;
         AudioSource.volume = Mathf.Clamp01(AudioSource.volume);
+        audioSlider.value = AudioSource.volume;
     }
 
     private void raiseVolume()
     {
         AudioSource.volume += volumeDecayRate;
         AudioSource.volume = Mathf.Clamp01(AudioSource.volume);
+        audioSlider.value = AudioSource.volume;
     }
 
     public void PlayAudio(AudioClip clip)
