@@ -63,6 +63,7 @@ public class AudioManager : MonoBehaviour
         AudioSource.volume -= volumeDecayRate;
         AudioSource.volume = Mathf.Clamp01(AudioSource.volume);
         audioSlider.value = AudioSource.volume;
+        PlayAudio(audioDict["MenuSelect"]);
     }
 
     private void raiseVolume()
@@ -70,6 +71,7 @@ public class AudioManager : MonoBehaviour
         AudioSource.volume += volumeDecayRate;
         AudioSource.volume = Mathf.Clamp01(AudioSource.volume);
         audioSlider.value = AudioSource.volume;
+        PlayAudio(audioDict["MenuSelect"]);
     }
 
     public void PlayAudio(AudioClip clip)
