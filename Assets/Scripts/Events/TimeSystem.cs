@@ -20,7 +20,7 @@ public class TimeSystem : MonoBehaviour
 
     public static uint[] daysInMonth = { 31, 30, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     public const int clockSpeed = 15;
-    public static bool isMorning = true;
+    public static bool isMorning = true, isNight = false;
 
     private static int timeElapsed;
 
@@ -57,6 +57,11 @@ public class TimeSystem : MonoBehaviour
         set
         {
             hour = value;
+
+            if((hour == 6 && isMorning) || (hour == 8 && !isMorning))
+            {
+                isNight = !isNight;
+            }
 
             if(hour == 12)
             {

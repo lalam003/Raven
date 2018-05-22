@@ -10,5 +10,6 @@ public class TriggerEvent : Event
     {
         trigger = GetComponent<Trigger>();
         trigger.OnTrigger += task.ExecuteTask;
+        trigger.OnTrigger += () => { trigger.OnTrigger -= task.ExecuteTask; };
     }
 }

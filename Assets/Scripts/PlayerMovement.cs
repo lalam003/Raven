@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(Inventory))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
     private enum Direction
@@ -10,6 +13,16 @@ public class PlayerMovement : MonoBehaviour
         East,
         West
     }
+
+    public delegate Vector2 MovementAction();
+    public MovementAction Up;
+    public MovementAction Down;
+    public MovementAction Left;
+    public MovementAction Right;
+
+    public delegate void ControlsAction();
+    public ControlsAction Menu;
+    public ControlsAction Interact;
 
     [SerializeField]
     private float moveSpeed = 1.0f;
@@ -51,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         playerControls = Blackboard.ParseControlMap(new PlayerControls());
         interactDistance = 1; //GridClass.Instance.GetComponent<Grid>.cellsize.x
-        Blackboard.Player = this;
+        ResetMovementKeys();
     }
 
     private void FixedUpdate()
@@ -59,34 +72,29 @@ public class PlayerMovement : MonoBehaviour
         if(CanMove)
         {
             Vector2 targetPos = Vector2.zero;
-            Direction targetDir = playerFacingDirection;
+            Direction prevDir = playerFacingDirection;
 
             if (Input.GetKey(playerControls.West))
             {
-                targetPos.x += (-1f * moveSpeed);
-                targetDir = Direction.West;
+                targetPos = Left();
             }
             if (Input.GetKey(playerControls.East))
             {
-                targetPos.x += moveSpeed;
-                targetDir = Direction.East;
+                targetPos = Right();
             }
             if (Input.GetKey(playerControls.North))
             {
-                targetPos.y += moveSpeed;
-                targetDir = Direction.North;
+                targetPos = Up();
             }
             if (Input.GetKey(playerControls.South))
             {
-                targetPos.y += (-1f * moveSpeed);
-                targetDir = Direction.South;
+                targetPos = Down();
             }
 
             if (targetPos != Vector2.zero)
             {
-                if (targetDir != playerFacingDirection || anim.GetBool(IdleKey))
+                if (prevDir != playerFacingDirection || anim.GetBool(IdleKey))
                 {
-                    playerFacingDirection = targetDir;
                     string key = getAnimationKey();
                     anim.SetBool(IdleKey, false);
                     anim.SetTrigger(key);
@@ -107,14 +115,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(playerControls.Interact))
             {
-                interact();
+                Interact();
             }
             if (Input.GetKeyDown(playerControls.Menu))
             {
-                if (!Blackboard.Menu.gameObject.activeSelf)
-                {
-                    Blackboard.Menu.gameObject.SetActive(true);
-                }
+                Menu();
             }
         }
     }
@@ -181,4 +186,64 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void ResetMovementKeys()
+    {
+        Left = () =>
+        {
+            playerFacingDirection = Direction.West;
+            return Vector2.left * moveSpeed;
+        };
+
+        Right = () =>
+        {
+            playerFacingDirection = Direction.East;
+            return Vector2.right * moveSpeed;
+        };
+
+        Up = () =>
+        {
+            playerFacingDirection = Direction.North;
+            return Vector2.up * moveSpeed;
+        };
+
+        Down = () =>
+        {
+            playerFacingDirection = Direction.South;
+            return Vector2.down * moveSpeed;
+        };
+
+        Menu = () =>
+        {
+            if (!Blackboard.Menu.gameObject.activeSelf)
+            {
+                Blackboard.Menu.gameObject.SetActive(true);
+            }
+        };
+
+        Interact = () =>
+        {
+            interact();
+        };
+    }
+
+    public static IEnumerator HeldKeyStart(KeyCode key, Action callback, float delay)
+    {
+        float startTime = Time.unscaledTime;
+        KeyCode heldKey = key;
+        // Wait one second before quick-scrolling
+        while (Input.GetKey(key))
+        {
+            // wait 1 second before quick-toggling
+            if (Time.unscaledTime - startTime < 0.5f)
+            {
+                yield return null;
+            }
+            else
+            {
+                // continue toggling 5 times per second
+                callback();
+                yield return new WaitForSecondsRealtime(delay);
+            }
+        }
+    }
 }

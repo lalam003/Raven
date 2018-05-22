@@ -2,7 +2,7 @@
 {
     // Static references
     public static PlayerControls ControlMap;
-    public static PlayerMovement Player;
+    public static Player Player;
     public static MainMenu Menu;
 
     public static PlayerControls ParseControlMap(PlayerControls newControls)

@@ -80,9 +80,8 @@ public class MainMenu : MenuBase
         audioManager.PlayAudio(menuOpen);
     }
 
-     protected override void Update()
+     protected void Update()
     {
-        base.Update();
         updateClockHands();
         updateClockDigital();
     }
