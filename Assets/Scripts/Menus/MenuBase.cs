@@ -35,15 +35,14 @@ public abstract class MenuBase : MonoBehaviour
     [SerializeField]
     protected AudioClip menuClose;
     [SerializeField]
-    protected GameManager gameManager;
+    protected AudioManager audioManager;
 
     // Internal variables
     [SerializeField, Tooltip("Set a size for columns then drag and drop menu Text objects that the user can scroll through.")]
     protected TextArrayContainer[] menuColumns;
     protected int col = 0;
     protected int row = 0;
-    protected KeyCode heldKey;
-    protected delegate void toggleMenuDelegate();
+    protected IEnumerator routine;
 
     protected List<Text> currentList
     {
@@ -83,46 +82,63 @@ public abstract class MenuBase : MonoBehaviour
         }
     }
 
-    protected virtual void Update()
-    {
-        GetMenuInput();
-    }
-
     protected virtual void OnEnable()
     {
-        Blackboard.Player.CanMove = false;
+        SetMenuInput();
     }
 
-    protected void GetMenuInput()
+    public void SetMenuInput()
     {
-        if (Input.GetKeyDown(Blackboard.ControlMap.North))
+        Blackboard.Player.PlayerMovement.Up = () =>
         {
-            toggleMenuUp();
-            toggleMenuDelegate del = toggleMenuUp;
-            StartCoroutine(heldKeyStart(Blackboard.ControlMap.North, del));
-        }
-        if (Input.GetKeyDown(Blackboard.ControlMap.South))
+            if(routine == null || !routine.MoveNext())
+            {
+                toggleMenuUp();
+                routine = PlayerMovement.HeldKeyStart(Blackboard.ControlMap.North, toggleMenuUp, quickScrollDelay);
+                StartCoroutine(routine);
+            }
+
+            return Vector2.zero;
+        };
+
+        Blackboard.Player.PlayerMovement.Down = () =>
         {
-            toggleMenuDown();
-            toggleMenuDelegate del = toggleMenuDown;
-            StartCoroutine(heldKeyStart(Blackboard.ControlMap.South, del));
-        }
-        if (Input.GetKeyDown(Blackboard.ControlMap.East))
+            if (routine == null || !routine.MoveNext())
+            {
+                toggleMenuDown();
+                routine = PlayerMovement.HeldKeyStart(Blackboard.ControlMap.South, toggleMenuDown, quickScrollDelay);
+                StartCoroutine(routine);
+            }
+
+            return Vector2.zero;
+        };
+
+        Blackboard.Player.PlayerMovement.Right = () =>
         {
-            toggleMenuRight();
-        }
-        if (Input.GetKeyDown(Blackboard.ControlMap.West))
+            if (routine == null || !routine.MoveNext())
+            {
+                toggleMenuRight();
+                routine = PlayerMovement.HeldKeyStart(Blackboard.ControlMap.East, toggleMenuRight, quickScrollDelay);
+                StartCoroutine(routine);
+            }
+
+            return Vector2.zero;
+        };
+
+        Blackboard.Player.PlayerMovement.Left = () =>
         {
-            toggleMenuLeft();
-        }
-        if (Input.GetKeyDown(Blackboard.ControlMap.Interact))
-        {
-            selectText();
-        }
-        if (Input.GetKeyDown(Blackboard.ControlMap.Menu))
-        {
-            closeMenu();
-        }
+            if (routine == null || !routine.MoveNext())
+            {
+                toggleMenuLeft();
+                routine = PlayerMovement.HeldKeyStart(Blackboard.ControlMap.West, toggleMenuLeft, quickScrollDelay);
+                StartCoroutine(routine);
+            }
+
+            return Vector2.zero;
+        };
+
+        Blackboard.Player.PlayerMovement.Interact = selectText;
+        Blackboard.Player.PlayerMovement.Menu = closeMenu;
     }
 
     protected virtual void toggleMenuUp()
@@ -132,11 +148,11 @@ public abstract class MenuBase : MonoBehaviour
             currentText.color = unselectedColor;
             row--;
             currentText.color = selectedColor;
-            gameManager.PlayAudio(menuToggle);
+            audioManager.PlayAudio(menuToggle);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -147,11 +163,11 @@ public abstract class MenuBase : MonoBehaviour
             currentText.color = unselectedColor;
             row++;
             currentText.color = selectedColor;
-            gameManager.PlayAudio(menuToggle);
+            audioManager.PlayAudio(menuToggle);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -166,11 +182,11 @@ public abstract class MenuBase : MonoBehaviour
             col++;
             row = 0;
             currentText.color = selectedColor;
-            gameManager.PlayAudio(menuToggle);
+            audioManager.PlayAudio(menuToggle);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -186,11 +202,11 @@ public abstract class MenuBase : MonoBehaviour
                 t.color = unselectedColor;
             }
             currentText.color = selectedColor;
-            gameManager.PlayAudio(menuToggle);
+            audioManager.PlayAudio(menuToggle);
         }
         else
         {
-            gameManager.PlayAudio(menuError);
+            audioManager.PlayAudio(menuError);
         }
     }
 
@@ -198,7 +214,16 @@ public abstract class MenuBase : MonoBehaviour
     {
         resetAllTextColor();
         gameObject.SetActive(false);
-        Blackboard.Player.CanMove = true;
+        Blackboard.Player.PlayerMovement.ResetMovementKeys();
+    }
+
+    public void Quit()
+    {
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
     }
 
     /// <summary>
@@ -224,31 +249,6 @@ public abstract class MenuBase : MonoBehaviour
             foreach (Text t in column.innerList)
             {
                 t.color = unselectedColor;
-            }
-        }
-    }
-
-    /// <summary>
-    /// While a menu toggle key is held down, wait 1 second before quick-scrolling
-    /// </summary>
-    /// <returns></returns>
-    protected IEnumerator heldKeyStart(KeyCode key, toggleMenuDelegate toggleFunction)
-    {
-        float startTime = Time.unscaledTime;
-        heldKey = key;
-        // Wait one second before quick-scrolling
-        while (Input.GetKey(key))
-        {
-            // wait 1 second before quick-toggling
-            if (Time.unscaledTime - startTime < 0.5f)
-            {
-                yield return null;
-            }
-            else
-            {
-                // continue toggling 5 times per second
-                toggleFunction();
-                yield return new WaitForSecondsRealtime(quickScrollDelay);
             }
         }
     }

@@ -33,4 +33,5 @@ public class MenuAddons {
         }
         UnityEditor.AssetDatabase.Refresh();
     }
+    
 }

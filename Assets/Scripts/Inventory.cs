@@ -46,4 +46,20 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+
+    public bool UseItem(Item itemToUse)
+    {
+        if(Items.ContainsKey(itemToUse))
+        {
+            Items[itemToUse]--;
+
+            if(Items[itemToUse] == 0)
+            {
+                Items.Remove(itemToUse);
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

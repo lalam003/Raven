@@ -10,8 +10,9 @@ public class TalkingInteractable : Interactable
     private void Awake()
     {
         dialogueSystem = GetComponentInChildren<DialogueSystem>();
+        
     }
-
+    
     public override void Interact()
     {
         if (dialogueSystem.DialogueRunning)
