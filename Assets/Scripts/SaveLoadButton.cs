@@ -7,27 +7,39 @@ public class SaveLoadButton : MonoBehaviour {
     // Use this for initialization
     // Attach to buttons to call the save and load functions
     // Mainly used for testing not for actual gameplay
+    // Store player information in PlayerData class
+    // Store inventory information in InventoryData class.
+
     public GameObject Player;
 	void Start () {
 		
 	}
-	
+	//Disclaimer I promise nothing
 	public void Save()
     {
         Debug.Log("Saving Game");
-        PlayerData dataToSave = new PlayerData();
-        dataToSave.currentPosition = Player.transform.position;
-        dataToSave.currentInventory = Player.GetComponent<Inventory>();
-        SaveLoad.SaveGame(dataToSave, "player.json");
-        Debug.Log(dataToSave.currentPosition);
+        PlayerData.currentPlayer.currentPosition = Player.transform.position;
+        Inventory tempInv = Player.GetComponent<Inventory>();
+        foreach(KeyValuePair<Item, uint> item in tempInv.Items)
+        {
+            PlayerData.currentPlayer.items.Add(item.Key.ItemKey);
+            PlayerData.currentPlayer.amount.Add(item.Value);
+        }
+        SaveLoad.SaveGame(PlayerData.currentPlayer, "player.json");
+        Debug.Log(PlayerData.currentPlayer.currentPosition);
     }
+    //All scriptable objects should be in Resources Folder and name is the same as the itemkey
     public void Load()
     {
         Debug.Log("Loading Game");
-        PlayerData dataToLoad = new PlayerData();
         SaveLoad.LoadGame("player.json");
-        dataToLoad = SaveLoad.loadData;
-        Player.transform.position = dataToLoad.currentPosition;
+        PlayerData.currentPlayer = SaveLoad.loadData;
+        Player.transform.position = PlayerData.currentPlayer.currentPosition;
+        for(int i =0; i < PlayerData.currentPlayer.items.Count; i++)
+        {
+            Item item = Resources.Load<Item>(PlayerData.currentPlayer.items[i]);
+            Player.GetComponent<Inventory>().AddItem(item, PlayerData.currentPlayer.amount[i]);
+        }
         Debug.Log(SaveLoad.loadData.currentPosition);
     }
     public void Delete()
