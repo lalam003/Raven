@@ -63,10 +63,10 @@ public class Camera : Singleton<Camera>
 
         Blackboard.Player.PlayerMovement.CanMove = false;
         fadeDir = 1;
-        while(alpha > 0) { yield return null; }
+        while (alpha < 1) { yield return null; }
         Blackboard.Player.Respawn();
         fadeDir = -1;
-        while(alpha < 1) { yield return null; }
+        while (alpha > 0) { yield return null; }
         Blackboard.Player.PlayerMovement.CanMove = true;
     }
 }

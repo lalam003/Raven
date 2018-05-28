@@ -76,19 +76,19 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKey(playerControls.West))
             {
-                targetPos = Left();
+                targetPos += Left();
             }
             if (Input.GetKey(playerControls.East))
             {
-                targetPos = Right();
+                targetPos += Right();
             }
             if (Input.GetKey(playerControls.North))
             {
-                targetPos = Up();
+                targetPos += Up();
             }
             if (Input.GetKey(playerControls.South))
             {
-                targetPos = Down();
+                targetPos += Down();
             }
 
             if (targetPos != Vector2.zero)
