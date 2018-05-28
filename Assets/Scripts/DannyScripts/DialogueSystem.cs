@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using LightJson;
+using System;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class DialogueSystem : MonoBehaviour
     private IEnumerator routine;
     private string currentLine;
     private bool continueDisplay = false;
+    private Action callback;
 
     [SerializeField]
     private DialogueBox dialogueBox;
@@ -34,14 +36,18 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-    public void DisplayText(string filename, string key)
+    public void DisplayText(string filename, string key, Action callback = null)
     {
+        this.callback = callback;
         JsonObject file = ReadJson.ParseJsonFile(Application.dataPath + filePath + filename);
 
         if(file.ContainsKey(key))
         {
             dialogueText = file[key].AsJsonArray;
-            Blackboard.Menu.gameObject.SetActive(false); // In case of a bug dialogue has priority
+            if(Blackboard.Menu.gameObject.activeInHierarchy)
+            {
+                Blackboard.Menu.gameObject.SetActive(false);
+            }
             Blackboard.Menu.canOpen = false;
             Blackboard.Player.PlayerMovement.CanMove = false;
             dialogueRunning = true;
@@ -95,6 +101,12 @@ public class DialogueSystem : MonoBehaviour
 
         dialogueBox.gameObject.SetActive(false);
         dialogueRunning = false;
+
+        if(callback != null)
+        {
+            callback();
+        }
+
         Blackboard.Menu.canOpen = true;
         Blackboard.Player.PlayerMovement.CanMove = true;
     }

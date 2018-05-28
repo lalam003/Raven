@@ -111,16 +111,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (CanMove)
+        if (Input.GetKeyDown(playerControls.Interact))
         {
-            if (Input.GetKeyDown(playerControls.Interact))
-            {
-                Interact();
-            }
-            if (Input.GetKeyDown(playerControls.Menu))
-            {
-                Menu();
-            }
+            Interact();
+        }
+        if (Input.GetKeyDown(playerControls.Menu))
+        {
+            Menu();
         }
     }
 
@@ -143,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool interact()
-    {   
+    {
         Vector2 start = transform.position;
         Vector2 end = start + getInteractDirection() * interactDistance;
         int layerMask = 1 << interactableLayerMask;
@@ -157,9 +154,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Get the first hit object in the list which has an Interactable script and interact with it
                 Interactable hitInteractable = hit.transform.GetComponent<Interactable>();
+                Debug.Log("Hit " + hit.transform.gameObject.name);
 
                 if (hitInteractable)
                 {
+                    Debug.Log("Hit " + hitInteractable.gameObject.name);
                     hitInteractable.Interact();
                     return true;
                 }
