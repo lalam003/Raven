@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
 
     public void PlayerDeath()
     {
+        StartCoroutine(Camera.Instance.fade());
+    }
+
+    public void Respawn()
+    {
         gameObject.transform.position = respawn.position;
     }
 }

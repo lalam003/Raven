@@ -1,10 +1,7 @@
 {
-    "dialogue": [
-        "This is the dialogue system.",
-        "It works as intended.",
-        "What can make this better?",
-        "Who knows there are a lot of things we can add.",
-        "Wait and see.",
-        "The End."
-    ]
+	"menu": [
+		"home",
+		"projects",
+		"about"
+	]
 }
