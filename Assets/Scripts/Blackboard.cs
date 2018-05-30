@@ -4,6 +4,7 @@
     public static PlayerControls ControlMap;
     public static Player Player;
     public static MainMenu Menu;
+    public static bool PowerOn = true;
 
     public static PlayerControls ParseControlMap(PlayerControls newControls)
     {

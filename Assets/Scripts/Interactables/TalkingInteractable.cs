@@ -4,7 +4,7 @@
 public class TalkingInteractable : Interactable
 {
     private DialogueSystem dialogueSystem;
-    protected const string fileName = "BaseJson.json";
+    protected const string fileName = "Daun.json";
     protected const string keyName = "dialogue";
 
     private void Awake()
