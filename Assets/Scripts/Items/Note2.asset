@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c05e6dda33fc07d44827e09766caf421, type: 3}
-  m_Name: Note1
+  m_Name: Note2
   m_EditorClassIdentifier: 
-  itemKey: note1
+  itemKey: note2
   isNote: 1
   sprite: {fileID: 0}
   maxAmount: 1
-  description: Lies, Lies, LIES! Everyone tells me that we met at a bar and we stuck
-    together after a meteor struck the earth, It is all lies.
+  description: The check in area has changed since I got here. Vent is also damaged,
+    we need to check out the vent and A/C unit fast!
