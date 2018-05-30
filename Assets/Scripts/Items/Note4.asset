@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c05e6dda33fc07d44827e09766caf421, type: 3}
-  m_Name: Note1
+  m_Name: Note4
   m_EditorClassIdentifier: 
-  itemKey: note1
+  itemKey: note4
   isNote: 1
   sprite: {fileID: 0}
   maxAmount: 1
-  description: Lies, Lies, LIES! Everyone tells me that we met at a bar and we stuck
-    together after a meteor struck the earth, It is all lies.
+  description: My friends seem to want to keep me in. They seem afraid of the outside.
+    Am I stuck here forever? Is that what they want me to believe?

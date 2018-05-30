@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05e6dda33fc07d44827e09766caf421, type: 3}
   m_Name: WaterBottle
   m_EditorClassIdentifier: 
+  itemKey: waterbottle
   isNote: 0
   sprite: {fileID: 21300000, guid: 63c96b16f854a2d44b07f2d541606c36, type: 3}
   maxAmount: 5
