@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathInteractable : Interactable
+public class PickupTalkingInteractable : PickupInteractable
 {
     private DialogueSystem dialogueSystem;
-    private bool doneTalking = false;
 
     [SerializeField]
     protected string fileName;
@@ -14,8 +13,7 @@ public class DeathInteractable : Interactable
 
     private void Awake()
     {
-        dialogueSystem = GetComponent<DialogueSystem>();
-
+        dialogueSystem = GetComponentInChildren<DialogueSystem>();
     }
 
     public override void Interact()
@@ -26,14 +24,7 @@ public class DeathInteractable : Interactable
         }
         else
         {
-            dialogueSystem.DisplayText(
-                fileName, 
-                keyName, 
-                () => 
-                {
-                    Blackboard.Player.PlayerDeath();
-                    OnInteract();
-                });
+            dialogueSystem.DisplayText(fileName, keyName, base.Interact);
         }
     }
 }
