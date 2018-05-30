@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class Interactable : MonoBehaviour
+public class Interactable : MonoBehaviour
 {
     private Callback onInteract;
     public Callback OnInteract
@@ -22,7 +22,10 @@ public abstract class Interactable : MonoBehaviour
         }
     }
 
-    public abstract void Interact();
+    public virtual void Interact()
+    {
+        OnInteract();
+    }
 
     private void Awake()
     {

@@ -4,8 +4,11 @@
 public class TalkingInteractable : Interactable
 {
     private DialogueSystem dialogueSystem;
-    protected const string fileName = "Daun.json";
-    protected const string keyName = "dialogue";
+
+    [SerializeField]
+    protected string fileName;
+    [SerializeField]
+    protected string keyName;
 
     private void Awake()
     {
@@ -21,7 +24,7 @@ public class TalkingInteractable : Interactable
         }
         else
         {
-            dialogueSystem.DisplayText(fileName, keyName);
+            dialogueSystem.DisplayText(fileName, keyName, () => { OnInteract(); });
         }
     }
 }
