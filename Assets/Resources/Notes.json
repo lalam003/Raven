@@ -1,0 +1,34 @@
+{
+	"1": [
+		"Lies, Lies, LIES!",
+		"Everyone tells me that we met at a bar and we stuck together after a meteor struck the earth, It is all lies"
+	],
+	"2": [
+		"The check in area has changed since I got here.",
+		"Vent is also damaged, we need to check out the vent and A/C unit fast!"
+	],
+	"3": [
+		"I stumble across tools at the baggage claim, but I didn’t pick it up.",
+		"I think I will need it to fix the A/C unit."
+	],
+	"4": [
+		"My friends seem to want to keep me in. They seem afraid of the outside.",
+		"Am I stuck here forever? Is that what they want me to believe?"
+	],
+	"5": [
+		"I am afraid, I feel like we are stuck in this airport with weird creatures.",
+		"Am I going insane?"
+	],
+	"6": [
+		"I found this in a hallway a bit further in, one of the “friends” dropped it.",
+		"I want to find out what this leads to."
+	],
+	"7": [
+		"Either the A/C is malfunctioning or it is getting hotter.",
+		"Either way, I need to find the tools. These are the instructions to fix the A/C unit."
+	],
+	"death": [
+		"I found this in a hallway a bit further in, one of the “friends” dropped it.",
+		"I want to find out what this leads to."
+	]
+}
