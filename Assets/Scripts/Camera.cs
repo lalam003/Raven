@@ -5,6 +5,8 @@ public class Camera : Singleton<Camera>
 {
     [SerializeField]
     private Texture2D fadeTexture;
+    [SerializeField]
+    private PlayerMovement player;
     private float fadeSpeed = 0.2f;
     private int drawDepth = -1000;
 
@@ -33,6 +35,8 @@ public class Camera : Singleton<Camera>
         if((currentRoutine != null && !currentRoutine.MoveNext()) || currentRoutine == null)
         {
             currentRoutine = move(position);
+            player.PushIntoRoom();
+            player.CanMove = false;
             StartCoroutine(currentRoutine);
 
             return true;
@@ -55,6 +59,7 @@ public class Camera : Singleton<Camera>
             transform.position = currentPos;
             yield return null;
         }
+        player.CanMove = true;
     }
 
     public IEnumerator fade()

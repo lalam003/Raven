@@ -57,7 +57,29 @@ public class PlayerMovement : MonoBehaviour
             canMove = value;
         }
     }
-
+    public void PushIntoRoom()
+    {
+        Debug.Log(playerFacingDirection);
+        switch (playerFacingDirection)
+        {
+            
+            case Direction.North:
+                transform.Translate(Vector2.up *0.5f );
+                break;
+            case Direction.South:
+                transform.Translate(Vector2.down * 0.5f);
+                break;
+            case Direction.East:
+                transform.Translate(Vector2.right * 0.5f);
+                break;
+            case Direction.West:
+                transform.Translate(Vector2.left * 0.5f);
+                break;
+            default:
+                Debug.LogError("Direction type " + playerFacingDirection + " not a valid direction");
+                return;
+        }
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
