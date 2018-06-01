@@ -34,8 +34,6 @@ public abstract class MenuBase : MonoBehaviour
     protected AudioClip menuOpen;
     [SerializeField]
     protected AudioClip menuClose;
-    [SerializeField]
-    protected AudioManager audioManager;
 
     // Internal variables
     [SerializeField, Tooltip("Set a size for columns then drag and drop menu Text objects that the user can scroll through.")]
@@ -148,11 +146,11 @@ public abstract class MenuBase : MonoBehaviour
             currentText.color = unselectedColor;
             row--;
             currentText.color = selectedColor;
-            audioManager.PlayAudio(menuToggle);
+            Blackboard.Audio.PlayAudio(menuToggle);
         }
         else
         {
-            audioManager.PlayAudio(menuError);
+            Blackboard.Audio.PlayAudio(menuError);
         }
     }
 
@@ -163,11 +161,11 @@ public abstract class MenuBase : MonoBehaviour
             currentText.color = unselectedColor;
             row++;
             currentText.color = selectedColor;
-            audioManager.PlayAudio(menuToggle);
+            Blackboard.Audio.PlayAudio(menuToggle);
         }
         else
         {
-            audioManager.PlayAudio(menuError);
+            Blackboard.Audio.PlayAudio(menuError);
         }
     }
 
@@ -182,11 +180,11 @@ public abstract class MenuBase : MonoBehaviour
             col++;
             row = 0;
             currentText.color = selectedColor;
-            audioManager.PlayAudio(menuToggle);
+            Blackboard.Audio.PlayAudio(menuToggle);
         }
         else
         {
-            audioManager.PlayAudio(menuError);
+            Blackboard.Audio.PlayAudio(menuError);
         }
     }
 
@@ -202,15 +200,15 @@ public abstract class MenuBase : MonoBehaviour
                 t.color = unselectedColor;
             }
             currentText.color = selectedColor;
-            audioManager.PlayAudio(menuToggle);
+            Blackboard.Audio.PlayAudio(menuToggle);
         }
         else
         {
-            audioManager.PlayAudio(menuError);
+            Blackboard.Audio.PlayAudio(menuError);
         }
     }
 
-    protected virtual void closeMenu()
+    public virtual void closeMenu()
     {
         resetAllTextColor();
         gameObject.SetActive(false);
