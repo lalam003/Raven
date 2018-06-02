@@ -3378,6 +3378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTexture: {fileID: 2800000, guid: 8fe077a1c23522045a171f3fb19ef17a, type: 3}
+  player: {fileID: 0}
   cameraTransitionSpeed: 1
 --- !u!1 &497682343
 GameObject:
@@ -3817,6 +3818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ed10f0d15bcd14897c0bbae39edb58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fileName: 
+  keyName: 
 --- !u!114 &678950198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4397,7 +4400,6 @@ MonoBehaviour:
   menuSelect: {fileID: 8300000, guid: 9c44444321c022346a16200590017a70, type: 3}
   menuOpen: {fileID: 8300000, guid: 710ebb9ddef0b284f8a83320281c5f62, type: 3}
   menuClose: {fileID: 8300000, guid: 20bd2c64b9650504e9f0533a8d47f18f, type: 3}
-  audioManager: {fileID: 0}
   menuColumns:
   - innerList:
     - {fileID: 1150862296}
@@ -4888,7 +4890,6 @@ MonoBehaviour:
   menuSelect: {fileID: 8300000, guid: 9c44444321c022346a16200590017a70, type: 3}
   menuOpen: {fileID: 8300000, guid: 710ebb9ddef0b284f8a83320281c5f62, type: 3}
   menuClose: {fileID: 8300000, guid: 20bd2c64b9650504e9f0533a8d47f18f, type: 3}
-  audioManager: {fileID: 0}
   menuColumns:
   - innerList:
     - {fileID: 826047788}
@@ -4934,7 +4935,7 @@ MonoBehaviour:
     MyEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 997918177}
+        - m_Target: {fileID: 1855887454}
           m_MethodName: Save
           m_Mode: 1
           m_Arguments:
@@ -5467,8 +5468,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 997918177}
-        m_MethodName: Continue
+      - m_Target: {fileID: 1855887454}
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21429,6 +21430,22 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1845607531}
+--- !u!1 &1855887453 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1934791641033022, guid: dbe1c0daffc870045beefb58556192ea,
+    type: 2}
+  m_PrefabInternal: {fileID: 469120206}
+--- !u!114 &1855887454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1855887453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4115d3f5c6ee14cb74ee0a456b78ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1867868657
 GameObject:
   m_ObjectHideFlags: 0

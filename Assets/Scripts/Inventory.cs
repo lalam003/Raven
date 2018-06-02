@@ -8,8 +8,8 @@ public class Inventory : MonoBehaviour
     public Item Note1;
     private void Awake()
     {
-        AddItem(WaterBottle, 2);
-        AddItem(Note1, 1);
+        //AddItem(WaterBottle, 2);
+        //AddItem(Note1, 1);
     }
     // End Test
 

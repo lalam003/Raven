@@ -10,9 +10,10 @@ public class SaveLoadButton : MonoBehaviour {
     // Store player information in PlayerData class
     // Store inventory information in InventoryData class.
 
-    public GameObject Player;
-	void Start () {
-		
+    private GameObject Player;
+	void Start ()
+    {
+        Player = Blackboard.Player.gameObject;
 	}
 	//Disclaimer I promise nothing
 	public void Save()
@@ -38,9 +39,11 @@ public class SaveLoadButton : MonoBehaviour {
         for(int i =0; i < PlayerData.currentPlayer.items.Count; i++)
         {
             Item item = Resources.Load<Item>(PlayerData.currentPlayer.items[i]);
+            print("item: " + item.name);
             Player.GetComponent<Inventory>().AddItem(item, PlayerData.currentPlayer.amount[i]);
         }
         Debug.Log(SaveLoad.loadData.currentPosition);
+        Blackboard.Title.closeMenu();
     }
     public void Delete()
     {

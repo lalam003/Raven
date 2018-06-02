@@ -21,7 +21,10 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        print("i'm awake");
+        PlayerData.currentPlayer = new PlayerData();
         Blackboard.Player = this;
+        PlayerData.currentPlayer.currentPosition = transform.position;
         PlayerMovement = GetComponent<PlayerMovement>();
     }
 
