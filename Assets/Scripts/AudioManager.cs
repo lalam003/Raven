@@ -16,15 +16,16 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        Blackboard.Audio = this;
         AudioSource = GetComponent<AudioSource>();
         loadAudio();
     }
 
     public void AdjustVolume()
     {
-        Blackboard.Player.PlayerMovement.Up =    () => { return Vector2.zero; };
-        Blackboard.Player.PlayerMovement.Down =  () => { return Vector2.zero; };
-        Blackboard.Player.PlayerMovement.Right = () => 
+        Blackboard.Player.PlayerMovement.Up = () => { return Vector2.zero; };
+        Blackboard.Player.PlayerMovement.Down = () => { return Vector2.zero; };
+        Blackboard.Player.PlayerMovement.Right = () =>
         {
             if (routine == null || !routine.MoveNext())
             {
@@ -78,6 +79,19 @@ public class AudioManager : MonoBehaviour
     {
         AudioSource.clip = clip;
         AudioSource.Play();
+    }
+
+    public void PlayAudio(string clip)
+    {
+        if (audioDict.ContainsKey(clip))
+        {
+            AudioSource.clip = audioDict[clip];
+            AudioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Audio clip: " + clip + " not found.");
+        }
     }
 
     private void loadAudio()

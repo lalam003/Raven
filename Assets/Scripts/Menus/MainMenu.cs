@@ -58,7 +58,7 @@ public class MainMenu : MenuBase
             itemSprite.sprite = clickedItem.Sprite;
             itemDescription.text = clickedItem.Description;
         }
-        audioManager.PlayAudio(menuSelect);
+        Blackboard.Audio.PlayAudio(menuSelect);
     }
 
     protected override void Awake()
@@ -77,7 +77,7 @@ public class MainMenu : MenuBase
         clearListText(menuColumns[1].innerList);
         clearQty();
         currentText.color = selectedColor;
-        audioManager.PlayAudio(menuOpen);
+        Blackboard.Audio.PlayAudio(menuOpen);
     }
 
      protected void Update()
@@ -107,11 +107,11 @@ public class MainMenu : MenuBase
             currentText.color = unselectedColor;
             row++;
             currentText.color = selectedColor;
-            audioManager.PlayAudio(menuToggle);
+            Blackboard.Audio.PlayAudio(menuToggle);
         }
         else
         {
-            audioManager.PlayAudio(menuError);
+            Blackboard.Audio.PlayAudio(menuError);
         }
     }
 
@@ -132,11 +132,11 @@ public class MainMenu : MenuBase
             currentText.color = selectedColor;
             menuListLength = currentList.Count;
             clearItemDisplay();
-            audioManager.PlayAudio(menuToggle);
+            Blackboard.Audio.PlayAudio(menuToggle);
         }
         else
         {
-            audioManager.PlayAudio(menuError);
+            Blackboard.Audio.PlayAudio(menuError);
         }
     }
 
@@ -155,19 +155,19 @@ public class MainMenu : MenuBase
             row = 0;
             currentText.color = selectedColor;
             displaySubmenu();
-            audioManager.PlayAudio(menuSelect);
+            Blackboard.Audio.PlayAudio(menuSelect);
         }
         else
         {
-            audioManager.PlayAudio(menuError);
+            Blackboard.Audio.PlayAudio(menuError);
         }
     }
 
-    protected override void closeMenu()
+    public override void closeMenu()
     {
         resetScrollPosition();
         clearItemDisplay();
-        audioManager.PlayAudio(menuClose);
+        Blackboard.Audio.PlayAudio(menuClose);
         base.closeMenu();
     }
 

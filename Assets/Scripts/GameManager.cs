@@ -12,6 +12,20 @@ public class GameManager : MonoBehaviour
         loadAudio();
     }
 
+    public void Continue()
+    {
+        PlayAudio("GameStart");
+        Debug.Log("Continue feature not implemented yet.");
+        Blackboard.Title.closeMenu();
+    }
+
+    public void NewGame()
+    {
+        PlayAudio("GameStart");
+        Debug.Log("NewGame feature not implemented yet.");
+        Blackboard.Title.closeMenu();
+    }
+
     public void Save()
     {
         Debug.Log("Save feature not implemented yet.");
@@ -35,6 +49,19 @@ public class GameManager : MonoBehaviour
     {
         audioSource.clip = clip;
         audioSource.Play();
+    }
+
+    public void PlayAudio(string clip)
+    {
+        if (audioDict.ContainsKey(clip))
+        {
+            audioSource.clip = audioDict[clip];
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Audio clip: " + clip + " not found.");
+        }
     }
 
     private void loadAudio()
