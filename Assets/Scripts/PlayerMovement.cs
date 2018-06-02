@@ -57,7 +57,29 @@ public class PlayerMovement : MonoBehaviour
             canMove = value;
         }
     }
-
+    public void PushIntoRoom()
+    {
+        Debug.Log(playerFacingDirection);
+        switch (playerFacingDirection)
+        {
+            
+            case Direction.North:
+                transform.Translate(Vector2.up *0.5f );
+                break;
+            case Direction.South:
+                transform.Translate(Vector2.down * 0.5f);
+                break;
+            case Direction.East:
+                transform.Translate(Vector2.right * 0.5f);
+                break;
+            case Direction.West:
+                transform.Translate(Vector2.left * 0.5f);
+                break;
+            default:
+                Debug.LogError("Direction type " + playerFacingDirection + " not a valid direction");
+                return;
+        }
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -76,19 +98,19 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKey(playerControls.West))
             {
-                targetPos = Left();
+                targetPos += Left();
             }
             if (Input.GetKey(playerControls.East))
             {
-                targetPos = Right();
+                targetPos += Right();
             }
             if (Input.GetKey(playerControls.North))
             {
-                targetPos = Up();
+                targetPos += Up();
             }
             if (Input.GetKey(playerControls.South))
             {
-                targetPos = Down();
+                targetPos += Down();
             }
 
             if (targetPos != Vector2.zero)
@@ -111,16 +133,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (CanMove)
+        if (Input.GetKeyDown(playerControls.Interact))
         {
-            if (Input.GetKeyDown(playerControls.Interact))
-            {
-                Interact();
-            }
-            if (Input.GetKeyDown(playerControls.Menu))
-            {
-                Menu();
-            }
+            Interact();
+        }
+        if (Input.GetKeyDown(playerControls.Menu))
+        {
+            Menu();
         }
     }
 
@@ -143,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool interact()
-    {   
+    {
         Vector2 start = transform.position;
         Vector2 end = start + getInteractDirection() * interactDistance;
         int layerMask = 1 << interactableLayerMask;
@@ -157,9 +176,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Get the first hit object in the list which has an Interactable script and interact with it
                 Interactable hitInteractable = hit.transform.GetComponent<Interactable>();
+                Debug.Log("Hit " + hit.transform.gameObject.name);
 
                 if (hitInteractable)
                 {
+                    Debug.Log("Hit " + hitInteractable.gameObject.name);
                     hitInteractable.Interact();
                     return true;
                 }

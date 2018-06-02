@@ -14,6 +14,7 @@ public class Room : MonoBehaviour
             Debug.Log("Move to " + cameraFocalPoint.position);
             Camera.Instance.MoveCamera(cameraFocalPoint.position);
             TimeSystem.IncrementTime();
+            
         }
     }
 }

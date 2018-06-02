@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05e6dda33fc07d44827e09766caf421, type: 3}
   m_Name: Note1
   m_EditorClassIdentifier: 
+  itemKey: note1
   isNote: 1
   sprite: {fileID: 0}
   maxAmount: 1
-  description: '...power outage ... breaker.. can fix... I need some tools...the luggage.'
+  description: Lies, Lies, LIES! Everyone tells me that we met at a bar and we stuck
+    together after a meteor struck the earth, It is all lies.

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05e6dda33fc07d44827e09766caf421, type: 3}
+  m_Name: Note3
+  m_EditorClassIdentifier: 
+  itemKey: note3
+  isNote: 1
+  sprite: {fileID: 0}
+  maxAmount: 1
+  description: "I stumble across tools at the baggage claim, but I didn\u2019t pick
+    it up. I think I will need it to fix the A/C unit"

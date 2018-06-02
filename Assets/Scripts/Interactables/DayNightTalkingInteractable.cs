@@ -6,9 +6,13 @@ using UnityEngine;
 public class DayNightTalkingInteractable : Interactable
 {
     private DialogueSystem dialogueSystem;
-    protected const string fileName = "BaseJson.json";
-    protected const string dayKeyName = "day_dialogue";
-    protected const string nightKeyName = "night_dialogue";
+
+    [SerializeField]
+    protected string fileName;
+    [SerializeField]
+    protected string dayKeyName = "day_dialogue";
+    [SerializeField]
+    protected string nightKeyName = "night_dialogue";
 
     private void Awake()
     {
