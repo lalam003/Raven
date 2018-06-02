@@ -14,7 +14,7 @@ public class InteractEvent : Event
         interactable.OnInteract += task.ExecuteTask;
         if(occurOnce)
         {
-            interactable.OnInteract += () => { interactable.OnInteract -= task.ExecuteTask; };
+            interactable.OnInteract += () => { interactable.OnInteract -= task.ExecuteTask; PlayerData.currentPlayer.eventList.Add(task.name); PlayerData.currentPlayer.eventHasOccurred.Add(true);};
         }
     }
 }
