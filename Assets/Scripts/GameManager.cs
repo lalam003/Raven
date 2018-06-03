@@ -1,34 +1,46 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     private Dictionary<string, AudioClip> audioDict = new Dictionary<string, AudioClip>();
     public AudioSource audioSource;
+    public Image BlackScreen;
+    public delegate void CoroutineAction();
+    public SaveLoadButton saveButton;
 
     private void Awake()
     {
+        Blackboard.GM = this;
         audioSource = GetComponent<AudioSource>();
+        TimeSystem.timeEvents = new Dictionary<int, System.Action>();
         loadAudio();
+        saveButton = new SaveLoadButton();
     }
 
     public void Continue()
     {
+        print("continuing");
+        if (!saveButton.Load())
+        {
+            NewGame();
+        }
         PlayAudio("GameStart");
-        Debug.Log("Continue feature not implemented yet.");
         Blackboard.Title.closeMenu();
     }
 
     public void NewGame()
     {
         PlayAudio("GameStart");
-        Debug.Log("NewGame feature not implemented yet.");
+        saveButton.Delete();
         Blackboard.Title.closeMenu();
     }
 
     public void Save()
     {
-        Debug.Log("Save feature not implemented yet.");
+        saveButton.Save();
     }
 
     public void AdjustVolume()
@@ -74,5 +86,33 @@ public class GameManager : MonoBehaviour
                 audioDict.Add(clip.name, clip);
             }
         }
+    }
+
+    public void StartFade(float time, CoroutineAction midFade, CoroutineAction afterFade)
+    {
+        Blackboard.Player.PlayerMovement.canMove = false;
+        StartCoroutine(Fade(time, midFade, afterFade));
+    }
+
+    private IEnumerator Fade(float time, CoroutineAction midFade, CoroutineAction afterFade)
+    {
+        float startTime = Time.time;
+        while ((Time.time - startTime) < time)
+        {
+            float frac = ((Time.time - startTime) / time);
+            Blackboard.GM.BlackScreen.color = new Color(Blackboard.GM.BlackScreen.color.r, Blackboard.GM.BlackScreen.color.g, Blackboard.GM.BlackScreen.color.b, frac);
+            yield return null;
+        }
+        midFade();
+        // Fade in
+        startTime = Time.time;
+        while ((Time.time - startTime) < time)
+        {
+            float frac = ((Time.time - startTime) / time);
+            Blackboard.GM.BlackScreen.color = new Color(Blackboard.GM.BlackScreen.color.r, Blackboard.GM.BlackScreen.color.g, Blackboard.GM.BlackScreen.color.b, (1 - frac));
+            yield return null;
+        }
+        afterFade();
+        Blackboard.Player.PlayerMovement.canMove = true;
     }
 }

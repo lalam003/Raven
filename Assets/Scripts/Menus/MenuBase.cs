@@ -82,6 +82,8 @@ public abstract class MenuBase : MonoBehaviour
 
     protected virtual void OnEnable()
     {
+        row = 0;
+        col = 0;
         SetMenuInput();
     }
 
@@ -210,6 +212,8 @@ public abstract class MenuBase : MonoBehaviour
 
     public virtual void closeMenu()
     {
+        row = 0;
+        col = 0;
         resetAllTextColor();
         gameObject.SetActive(false);
         Blackboard.Player.PlayerMovement.ResetMovementKeys();

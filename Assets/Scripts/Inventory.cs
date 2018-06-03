@@ -11,6 +11,10 @@ public class Inventory : MonoBehaviour
         AddItem(WaterBottle, 2);
         AddItem(Note1, 1);
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J)) { items.Remove(WaterBottle); }
+    }
     // End Test
 
     [SerializeField]
@@ -25,8 +29,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool AddItem(Item new_item, uint count)
+    public bool AddItem(Item new_item, uint count = 1)
     {
+        if (!new_item)
+        {
+            Debug.LogWarning("Attemptingn to add a null item.");
+        }   
+
         if (count > new_item.MaxAmount)
         {
             Debug.LogWarning("You are attempting to add "+count+" items but the max allowed amount is "+new_item.MaxAmount);
@@ -46,7 +55,7 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
-
+    
     public bool UseItem(Item itemToUse)
     {
         if(Items.ContainsKey(itemToUse))

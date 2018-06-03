@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     {
         Blackboard.Player = this;
         PlayerMovement = GetComponent<PlayerMovement>();
+        inventory = GetComponent<Inventory>();
     }
 
     public void PlayerDeath()

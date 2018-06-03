@@ -1,6 +1,7 @@
 ﻿public static class Blackboard
 {
     // Static references
+    public static GameManager GM;
     public static PlayerControls ControlMap;
     public static Player Player;
     public static MainMenu Menu;

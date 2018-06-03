@@ -8,7 +8,7 @@ using LightJson.Serialization;
 public static class SaveLoad
 {
     public static List<PlayerData> saveData = new List<PlayerData>();
-    
+
     //Stores most recently loaded data publicly accessible by other classes
     public static PlayerData loadData = new PlayerData();
     
