@@ -15,8 +15,6 @@ public class TitleMenu : MenuBase
     private float AnimationTime = 3;
     [SerializeField]
     private GameObject TitleSprites;
-    [SerializeField]
-    private Image BlackScreen;
 
     protected override void Awake()
     {
@@ -27,7 +25,9 @@ public class TitleMenu : MenuBase
     
     protected override void OnEnable()
     {
-        base.OnEnable();
+        TitleSprites.SetActive(true);
+        SetMenuInput();
+        Blackboard.Player.PlayerMovement.Menu = () => { };
         currentText.color = selectedColor;
     }
 
@@ -59,8 +59,14 @@ public class TitleMenu : MenuBase
         }
         else
         {
+            Blackboard.Player.PlayerMovement.canMove = false;
             StartCoroutine(AirplaneAnimation());
         }
+    }
+
+    public void showTitleSprites()
+    {
+        TitleSprites.SetActive(false);
     }
 
     private IEnumerator AirplaneAnimation()
@@ -80,19 +86,20 @@ public class TitleMenu : MenuBase
         while ((Time.time - startTime) < (AnimationTime / 4))
         {
             float frac = ((Time.time - startTime) / (AnimationTime / 4));
-            BlackScreen.color = new Color(BlackScreen.color.r, BlackScreen.color.g, BlackScreen.color.b, frac);
+            Blackboard.GM.BlackScreen.color = new Color(Blackboard.GM.BlackScreen.color.r, Blackboard.GM.BlackScreen.color.g, Blackboard.GM.BlackScreen.color.b, frac);
             yield return null;
         }
-        // Fade to game
         TitleSprites.SetActive(false);
+        // Fade to game
         startTime = Time.time;
         while ((Time.time - startTime) < (AnimationTime / 4))
         {
             float frac = ((Time.time - startTime) / (AnimationTime / 4));
-            BlackScreen.color = new Color(BlackScreen.color.r, BlackScreen.color.g, BlackScreen.color.b, (1-frac));
+            Blackboard.GM.BlackScreen.color = new Color(Blackboard.GM.BlackScreen.color.r, Blackboard.GM.BlackScreen.color.g, Blackboard.GM.BlackScreen.color.b, (1-frac));
             yield return null;
         }
         AirplaneSprite.transform.localPosition = StartPosition;
         base.closeMenu();
+        Blackboard.Player.PlayerMovement.canMove = true;
     }
 }

@@ -80,7 +80,7 @@ public class MainMenu : MenuBase
         Blackboard.Audio.PlayAudio(menuOpen);
     }
 
-     protected void Update()
+    protected void Update()
     {
         updateClockHands();
         updateClockDigital();
@@ -153,8 +153,8 @@ public class MainMenu : MenuBase
             }
             col++;
             row = 0;
-            currentText.color = selectedColor;
             displaySubmenu();
+            currentText.color = selectedColor;
             Blackboard.Audio.PlayAudio(menuSelect);
         }
         else
@@ -169,6 +169,21 @@ public class MainMenu : MenuBase
         clearItemDisplay();
         Blackboard.Audio.PlayAudio(menuClose);
         base.closeMenu();
+    }
+
+    public void returnToTitle()
+    {
+        Blackboard.GM.StartFade(1,
+            () =>
+            {
+                closeMenu();
+                Blackboard.Title.gameObject.SetActive(true);
+            },
+            () =>
+            {
+                
+            }
+        );
     }
 
     private void clearListText(List<Text> innerList)
@@ -235,8 +250,15 @@ public class MainMenu : MenuBase
             foreach (KeyValuePair<Item, uint> entry in items)
             {
                 currentList[index].text = entry.Key.name;
-                menuItemQtys[index].text = entry.Value.ToString();
+                Text qtyText = currentList[index].transform.parent.GetChild(1).GetComponent<Text>();
+                qtyText.text = entry.Value.ToString();
+                if (!menuItemQtys.Contains(qtyText))
+                {
+                    menuItemQtys.Add(qtyText);
+                }
                 // Add the function to call when this tiem's button is clicked
+                DestroyImmediate(currentList[index].GetComponent<Button>());
+                currentList[index].gameObject.AddComponent<Button>();
                 currentList[index].GetComponent<Button>().onClick.AddListener(() => ItemOnClick(entry.Key));
                 index++;
             }
@@ -263,7 +285,6 @@ public class MainMenu : MenuBase
             for (int i = 0; i < eventsCount; ++i)
             {
                 currentList[i].text = events[i].label;
-                currentList[i].GetComponent<Button>().onClick.RemoveAllListeners();
                 currentList[i].GetComponent<Button>().onClick = events[i].MyEvent;
             }
             menuListLength = events.Count;

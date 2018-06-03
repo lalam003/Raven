@@ -7,6 +7,11 @@ public class Interactable : MonoBehaviour
     {
         get
         {
+            if(onInteract == null)
+            {
+                onInteract = () => { };
+            }
+
             return onInteract;
         }
         set

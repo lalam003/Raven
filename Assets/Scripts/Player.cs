@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
         Blackboard.Player = this;
         PlayerData.currentPlayer.currentPosition = transform.position;
         PlayerMovement = GetComponent<PlayerMovement>();
+        inventory = GetComponent<Inventory>();
     }
 
     public void PlayerDeath()

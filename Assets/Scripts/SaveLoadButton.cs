@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveLoadButton : MonoBehaviour {
+public class SaveLoadButton : MonoBehaviour
+{
 
     // Use this for initialization
     // Attach to buttons to call the save and load functions
@@ -10,19 +11,16 @@ public class SaveLoadButton : MonoBehaviour {
     // Store player information in PlayerData class
     // Store inventory information in InventoryData class.
 
-    private GameObject Player;
-	void Start ()
-    {
-        Player = Blackboard.Player.gameObject;
-	}
-	//Disclaimer I promise nothing
-	public void Save()
+    public void Save()
     {
         Debug.Log("Saving Game");
-        PlayerData.currentPlayer.currentPosition = Player.transform.position;
-        Inventory tempInv = Player.GetComponent<Inventory>();
-        foreach(KeyValuePair<Item, uint> item in tempInv.Items)
+        PlayerData.currentPlayer.currentPosition = Blackboard.Player.transform.position;
+        Inventory tempInv = Blackboard.Player.GetComponent<Inventory>();
+        PlayerData.currentPlayer.items.Clear();
+        PlayerData.currentPlayer.amount.Clear();
+        foreach (KeyValuePair<Item, uint> item in tempInv.Items)
         {
+            Debug.Log("Saved item: " + item.Key);
             PlayerData.currentPlayer.items.Add(item.Key.ItemKey);
             PlayerData.currentPlayer.amount.Add(item.Value);
         }
@@ -30,20 +28,24 @@ public class SaveLoadButton : MonoBehaviour {
         Debug.Log(PlayerData.currentPlayer.currentPosition);
     }
     //All scriptable objects should be in Resources Folder and name is the same as the itemkey
-    public void Load()
+    public bool Load()
     {
         Debug.Log("Loading Game");
         SaveLoad.LoadGame("player.json");
         PlayerData.currentPlayer = SaveLoad.loadData;
-        Player.transform.position = PlayerData.currentPlayer.currentPosition;
-        for(int i =0; i < PlayerData.currentPlayer.items.Count; i++)
+        if (PlayerData.currentPlayer.currentPosition == null)
+        {
+            return false;
+        }
+        Blackboard.Player.transform.position = PlayerData.currentPlayer.currentPosition;
+        Debug.Log("loaded: " + SaveLoad.loadData.currentPosition);
+        for (int i = 0; i < PlayerData.currentPlayer.items.Count; i++)
         {
             Item item = Resources.Load<Item>(PlayerData.currentPlayer.items[i]);
-            print("item: " + item.name);
-            Player.GetComponent<Inventory>().AddItem(item, PlayerData.currentPlayer.amount[i]);
+            Blackboard.Player.GetComponent<Inventory>().AddItem(item, PlayerData.currentPlayer.amount[i]);
+            Debug.Log("loaded: " + item.name);
         }
-        Debug.Log(SaveLoad.loadData.currentPosition);
-        Blackboard.Title.closeMenu();
+        return true;
     }
     public void Delete()
     {

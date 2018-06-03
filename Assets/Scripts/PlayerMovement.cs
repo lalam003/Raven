@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerControls playerControls;
     private Animator anim;
     private Rigidbody2D rb;
-    private bool canMove = true;
+    public bool canMove = true;
     public bool CanMove
     {
         get
@@ -137,9 +137,12 @@ public class PlayerMovement : MonoBehaviour
         {
             Interact();
         }
-        if (Input.GetKeyDown(playerControls.Menu))
+        if(canMove)
         {
-            Menu();
+            if (Input.GetKeyDown(playerControls.Menu))
+            {
+                Menu();
+            }
         }
     }
 
