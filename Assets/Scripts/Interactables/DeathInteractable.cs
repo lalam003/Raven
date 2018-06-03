@@ -5,7 +5,6 @@ using UnityEngine;
 public class DeathInteractable : Interactable
 {
     private DialogueSystem dialogueSystem;
-    private bool doneTalking = false;
 
     [SerializeField]
     protected string fileName;
@@ -14,7 +13,7 @@ public class DeathInteractable : Interactable
 
     private void Awake()
     {
-        dialogueSystem = GetComponent<DialogueSystem>();
+        dialogueSystem = GetComponentInChildren<DialogueSystem>();
 
     }
 

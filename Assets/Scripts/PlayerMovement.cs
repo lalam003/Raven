@@ -133,12 +133,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (canMove)
+        if (Input.GetKeyDown(playerControls.Interact))
         {
-            if (Input.GetKeyDown(playerControls.Interact))
-            {
-                Interact();
-            }
+            Interact();
+        }
+        if(canMove)
+        {
             if (Input.GetKeyDown(playerControls.Menu))
             {
                 Menu();
