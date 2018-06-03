@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     {
         Blackboard.GM = this;
         audioSource = GetComponent<AudioSource>();
+        TimeSystem.timeEvents = new Dictionary<int, System.Action>();
         loadAudio();
         //SaveLoad.loadData = new PlayerData();
         //PlayerData.currentPlayer = SaveLoad.loadData;

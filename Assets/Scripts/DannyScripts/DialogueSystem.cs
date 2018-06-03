@@ -101,12 +101,12 @@ public class DialogueSystem : MonoBehaviour
 
         dialogueBox.gameObject.SetActive(false);
         dialogueRunning = false;
-
+        Debug.Log("before callback");
         if(callback != null)
         {
             callback();
         }
-
+        print("aftercallback");
         Blackboard.Menu.canOpen = true;
         Blackboard.Player.PlayerMovement.CanMove = true;
     }
