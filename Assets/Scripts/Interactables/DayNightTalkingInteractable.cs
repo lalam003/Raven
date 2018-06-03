@@ -23,22 +23,17 @@ public class DayNightTalkingInteractable : Interactable
     {
         if (dialogueSystem.DialogueRunning)
         {
-            bool finished = !dialogueSystem.BreakDialogue();
-            
-            if(finished)
-            {
-                OnInteract();
-            }
+            dialogueSystem.BreakDialogue();
         }
         else
         {
             if(TimeSystem.isNight)
             {
-                dialogueSystem.DisplayText(fileName, dayKeyName);
+                dialogueSystem.DisplayText(fileName, dayKeyName, () => { OnInteract(); });
             }
             else
             {
-                dialogueSystem.DisplayText(fileName, nightKeyName);
+                dialogueSystem.DisplayText(fileName, nightKeyName, () => { OnInteract(); });
             }
         }
     }
