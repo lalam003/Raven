@@ -11,6 +11,10 @@ public class Inventory : MonoBehaviour
         AddItem(WaterBottle, 2);
         AddItem(Note1, 1);
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J)) { items.Remove(WaterBottle); }
+    }
     // End Test
 
     [SerializeField]
@@ -46,7 +50,7 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
-
+    
     public bool UseItem(Item itemToUse)
     {
         if(Items.ContainsKey(itemToUse))

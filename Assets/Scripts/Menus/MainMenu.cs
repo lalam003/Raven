@@ -80,7 +80,7 @@ public class MainMenu : MenuBase
         Blackboard.Audio.PlayAudio(menuOpen);
     }
 
-     protected void Update()
+    protected void Update()
     {
         updateClockHands();
         updateClockDigital();
@@ -169,6 +169,21 @@ public class MainMenu : MenuBase
         clearItemDisplay();
         Blackboard.Audio.PlayAudio(menuClose);
         base.closeMenu();
+    }
+
+    public void returnToTitle()
+    {
+        Blackboard.GM.StartFade(1,
+            () =>
+            {
+                closeMenu();
+                Blackboard.Title.gameObject.SetActive(true);
+            },
+            () =>
+            {
+                
+            }
+        );
     }
 
     private void clearListText(List<Text> innerList)
