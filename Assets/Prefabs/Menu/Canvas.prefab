@@ -2147,7 +2147,7 @@ MonoBehaviour:
     - {fileID: 114232493540721102}
     - {fileID: 114455888478276856}
     - {fileID: 114950936260202918}
-  StartGameAnimation: 1
+  StartGameAnimation: 0
   AirplaneSprite: {fileID: 224678207657241594}
   EndPosition: {fileID: 224996254576123504}
   AnimationTime: 3

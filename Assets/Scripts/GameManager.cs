@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public AudioSource audioSource;
     public Image BlackScreen;
     public delegate void CoroutineAction();
+    public SaveLoadButton saveButton;
 
     private void Awake()
     {
@@ -16,28 +17,30 @@ public class GameManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         TimeSystem.timeEvents = new Dictionary<int, System.Action>();
         loadAudio();
-        //SaveLoad.loadData = new PlayerData();
-        //PlayerData.currentPlayer = SaveLoad.loadData;
+        saveButton = new SaveLoadButton();
     }
 
     public void Continue()
     {
-        print("continueing");
+        print("continuing");
+        if (!saveButton.Load())
+        {
+            NewGame();
+        }
         PlayAudio("GameStart");
-        SaveLoad.LoadGame("save1");
         Blackboard.Title.closeMenu();
     }
 
     public void NewGame()
     {
         PlayAudio("GameStart");
-        SaveLoad.LoadGame("newgame");
+        saveButton.Delete();
         Blackboard.Title.closeMenu();
     }
 
     public void Save()
     {
-        SaveLoad.SaveGame(SaveLoad.loadData, "save1");
+        saveButton.Save();
     }
 
     public void AdjustVolume()
