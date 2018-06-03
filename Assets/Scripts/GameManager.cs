@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        TimeSystem.timeEvents = new Dictionary<int, System.Action>();
         loadAudio();
     }
 
