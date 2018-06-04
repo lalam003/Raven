@@ -1,0 +1,147 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{CS 179N Project Raven Write Up}
+\author{Darren Houn  \\ Emmilio Segovia \\ Lorenzo Alamillo \\\ Danny Diep \\ Chris Hyun}
+\date{June 3, 2018}
+\begin{document}
+\maketitle
+
+\section{Assets}
+This section lists all assets used in the game, where it came from, and how it was made.
+\subsection{Art}
+\begin{itemize}
+\item Artist: Emmilio Segovia
+\begin{itemize}
+\item Menus and User Interface
+\item Guard Rails
+\item Title Screen and Dialogue Box
+\item Reception Desk
+\item Stands
+\item Plants
+\item Conveyor Belt
+\end{itemize}
+
+\item Artist: Chris Hyun
+\begin{itemize}
+\item Characters and Animations
+\begin{itemize}
+\item Daun
+\item Ryn
+\item Lalo
+\item Milovia
+\item Player Character
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item Creatures and Animations
+\begin{itemize}
+\item Beryl
+\item Borys
+\item Lulu
+\item Ner
+\item Sana
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item Objects
+\begin{itemize}
+\item Baggage Claim
+\item Baggage Key
+\item Key
+\item Luggage
+\item Metal Detector
+\item Note
+\item Sign Post
+\item Switches
+\item Pillar
+\item Clock
+\end{itemize}
+\end{itemize}
+
+\item Artist: Darren Houn
+\begin{itemize}
+\item Airport 
+\item Airport Floor
+\item Water Fountain
+\item Boulder
+\item Heated Boulder
+\item Horizontal Sleeping Bag (Open/Closed)
+\item Lamp
+\item Potted Plants
+\item Vertical Sleeping Bag
+\end{itemize}
+
+\end{itemize}
+\subsection{Music}
+\begin{itemize}
+\item Freesound, Licenses: Creative Commons zero, by, and by-nc, Link to Licenses: \url{https://freesound.org/help/faq/#freesound}
+\item Free Music Archive, License: FMA License , Link: \url{https://freemusicarchive.org/FMA_Licenselegalcode}
+
+\end{itemize}
+\subsection{Software}
+Tools and libraries used and their licenses.
+\begin{itemize}
+\item Unity Engine, License: Proprietary, Link to EULA: \url{https://unity3d.com/legal/terms-of-service}
+\item LightJson, License: MIT, Link to Github: \url{https://github.com/MarcosLopezC/LightJson}
+\item Piskel, License: Apache License 2.0 Link to Github: \url{https://github.com/piskelapp/piskel/blob/master/LICENSE}
+\item Krita, License: GNU GPL v3, Link to License: \url{https://krita.org/en/download/krita-desktop/}
+\end{itemize}
+
+\section{Objectives}
+This section will state which objectives we have accomplished, which objectives we have dropped, what objectives we were unable to complete and the reasons why. If something is implemented but not quite working, tell me about it.
+\subsection{What Was Accomplished}
+\begin{itemize}
+\item Technical Accomplishments
+\begin{itemize}
+\item Character Movement - Simple omni-directional movement for the main character
+\item Camera Movement - Camera moves in cardinal direction in set change of length. Smooth transition has been implemented.
+\item Events - Interactions with certain objects and collision triggers will trigger events which will allow further advancement.
+\item Dialogue - Interacting with other creatures and character will trigger dialogue between the player and other characters.
+\item Time - Implemented a system where time passes and accounted for in game.
+\item Interactions - Implemented a system where the player can interact with objects and other characters.
+\item Save and Load - Saving the game and loading it in the future.
+\item Puzzles implemented and functional.
+\end{itemize}
+\item Creative Accomplishments
+\begin{itemize}
+\item Character sprites drawn and fully animated.
+\item Creature sprites drawn and fully animated.
+\item Environmental object sprites drawn and some animated.
+\item Tile maps created for Airport setting.
+\item User Interface designed and implemented.
+\end{itemize}
+\end{itemize}
+
+\subsection{What Was Dropped}
+\begin{itemize}
+\item Checkpoints - They were deemed unnecessary due to the fact that the player is allowed to save their progress at any point in the game. 
+\item Extra Environmental Art - Games have always been bottlenecked but the amount of art assets produced by the team. Art takes extensive lengths of time to complete and even longer to perfect.
+\item Future Levels - They have not been implemented because of need of time for extra pixel art that we cannot make in time. The pixel art needed may take even weeks to complete and we overestimated our art skills, but the design for the future levels are complete.
+\end{itemize}
+
+
+\section{Things to Improve On}
+\subsection{What Went Wrong}
+We initially factored in the time to learn a new game game engine when designing the project proposal so we went with a simple game design. It was only when we started working on it that we discovered that this type of game, the good ones at least have lots of variety in interactions, event tracking, etc. What was initially assumed to be a simple game to implement became difficult when writing out extensive story dialogue. We adhered to good programming guidelines to make clean, extensible code so that if we return to this project in the future, we can easily understand the layout of the files. The core systems of game play implemented were robust but we lacked the time to implement the different details and special code needed to modify the core systems. 
+\subsection{What We Could Do Better} 
+One thing we could have done better is have more communication between team members because each team member was assigned jobs that gives them work to accomplish that is different than other team members. The communication starts to fail because each team member does not know what each other have done and implemented. We could have implemented a system where each team gives a overview of what they have accomplished each lab so each team member is updated on the proceedings of the project.\\
+Another thing we could have done better is have more direction and clarity when assigning tasks to team members. The team can improve this by discussing within the group how to implement features and systems that requires other features and systems developed by another team member. 
+
+
+
+
+\end{document}
