@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
     private Dictionary<string, AudioClip> audioDict = new Dictionary<string, AudioClip>();
-    public AudioSource AudioSource;
+    public List<AudioSource> AudioSource;
     private IEnumerator routine;
     private const float scrollDelay = .5f;
     private const float volumeDecayRate = .05f;
@@ -17,7 +17,6 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         Blackboard.Audio = this;
-        AudioSource = GetComponent<AudioSource>();
         loadAudio();
     }
 
@@ -55,38 +54,44 @@ public class AudioManager : MonoBehaviour
             Blackboard.Menu.SetMenuInput();
         };
 
-        audioSlider.value = AudioSource.volume;
+        audioSlider.value = AudioSource[0].volume;
         audioSlider.gameObject.SetActive(true);
     }
 
     private void lowerVolume()
     {
-        AudioSource.volume -= volumeDecayRate;
-        AudioSource.volume = Mathf.Clamp01(AudioSource.volume);
-        audioSlider.value = AudioSource.volume;
-        PlayAudio(audioDict["MenuSelect"]);
+        foreach(AudioSource AudioSource in AudioSource)
+        {
+            AudioSource.volume -= volumeDecayRate;
+            AudioSource.volume = Mathf.Clamp01(AudioSource.volume);
+            audioSlider.value = AudioSource.volume;
+            PlayAudio(audioDict["MenuSelect"]);
+        }
     }
 
     private void raiseVolume()
     {
-        AudioSource.volume += volumeDecayRate;
-        AudioSource.volume = Mathf.Clamp01(AudioSource.volume);
-        audioSlider.value = AudioSource.volume;
-        PlayAudio(audioDict["MenuSelect"]);
+        foreach (AudioSource AudioSource in AudioSource)
+        {
+            AudioSource.volume += volumeDecayRate;
+            AudioSource.volume = Mathf.Clamp01(AudioSource.volume);
+            audioSlider.value = AudioSource.volume;
+            PlayAudio(audioDict["MenuSelect"]);
+        }
     }
 
     public void PlayAudio(AudioClip clip)
     {
-        AudioSource.clip = clip;
-        AudioSource.Play();
+        AudioSource[0].clip = clip;
+        AudioSource[0].Play();
     }
 
     public void PlayAudio(string clip)
     {
         if (audioDict.ContainsKey(clip))
         {
-            AudioSource.clip = audioDict[clip];
-            AudioSource.Play();
+            AudioSource[0].clip = audioDict[clip];
+            AudioSource[0].Play();
         }
         else
         {
