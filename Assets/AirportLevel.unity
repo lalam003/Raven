@@ -304,6 +304,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4687832447883714, guid: e07b60922f8b38b44b5a940675d498cd,
     type: 2}
   m_PrefabInternal: {fileID: 221497119}
+--- !u!114 &95422542 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000425373315232, guid: 310341674b6f82540bf7cf3dfaa786f0,
+    type: 2}
+  m_PrefabInternal: {fileID: 619512605}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &104962192
 GameObject:
   m_ObjectHideFlags: 0
@@ -5304,6 +5310,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114764779077766930, guid: 310341674b6f82540bf7cf3dfaa786f0,
+        type: 2}
+      propertyPath: menuColumns.Array.data[0].innerList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 224043909443570898, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_RootOrder
@@ -5467,6 +5478,25 @@ Prefab:
     - target: {fileID: 1410366862514854, guid: 310341674b6f82540bf7cf3dfaa786f0, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114764779077766930, guid: 310341674b6f82540bf7cf3dfaa786f0,
+        type: 2}
+      propertyPath: menuColumns.Array.data[0].innerList.Array.data[2]
+      value: 
+      objectReference: {fileID: 868350090}
+    - target: {fileID: 1058722284252064, guid: 310341674b6f82540bf7cf3dfaa786f0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114764779077766930, guid: 310341674b6f82540bf7cf3dfaa786f0,
+        type: 2}
+      propertyPath: menuColumns.Array.data[0].innerList.Array.data[1]
+      value: 
+      objectReference: {fileID: 95422542}
+    - target: {fileID: 224874629847492374, guid: 310341674b6f82540bf7cf3dfaa786f0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -102.85
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 310341674b6f82540bf7cf3dfaa786f0, type: 2}
@@ -6145,6 +6175,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueBox: {fileID: 299473620}
   textSpeed: 1
+--- !u!114 &868350090 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114590972439344806, guid: 310341674b6f82540bf7cf3dfaa786f0,
+    type: 2}
+  m_PrefabInternal: {fileID: 619512605}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &870225944
 GameObject:
   m_ObjectHideFlags: 0

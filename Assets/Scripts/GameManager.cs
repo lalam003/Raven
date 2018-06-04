@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         PlayAudio("GameStart");
         saveButton.Delete();
         Blackboard.Title.closeMenu();
+        Blackboard.Player.transform.position = (new Vector2(-4, -2));
     }
 
     public void Save()
