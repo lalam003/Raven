@@ -5734,6 +5734,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &705524471
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4957159302420726, guid: 1a4fc667413d661428aae018912206ee, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 28.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4957159302420726, guid: 1a4fc667413d661428aae018912206ee, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4957159302420726, guid: 1a4fc667413d661428aae018912206ee, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4957159302420726, guid: 1a4fc667413d661428aae018912206ee, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4957159302420726, guid: 1a4fc667413d661428aae018912206ee, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4957159302420726, guid: 1a4fc667413d661428aae018912206ee, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4957159302420726, guid: 1a4fc667413d661428aae018912206ee, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4957159302420726, guid: 1a4fc667413d661428aae018912206ee, type: 2}
+      propertyPath: m_RootOrder
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 61036307070065106, guid: 1a4fc667413d661428aae018912206ee,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549658291854078, guid: 1a4fc667413d661428aae018912206ee, type: 2}
+      propertyPath: m_Name
+      value: RoomSizeRuler (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 1a4fc667413d661428aae018912206ee, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &795111669
 GameObject:
   m_ObjectHideFlags: 0
@@ -6478,7 +6529,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4415757990436846, guid: dbb2c927d2c20c945b8c41117cfdbb54, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 212617653395278076, guid: dbb2c927d2c20c945b8c41117cfdbb54,
         type: 2}
