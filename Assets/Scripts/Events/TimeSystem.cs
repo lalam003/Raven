@@ -122,9 +122,12 @@ public class TimeSystem : MonoBehaviour
         timeElapsed++;
         Minute += clockSpeed;
 
-        if (timeEvents.ContainsKey(timeElapsed))
+        if(timeEvents != null)
         {
-            timeEvents[timeElapsed].Invoke();
+            if (timeEvents.ContainsKey(timeElapsed))
+            {
+                timeEvents[timeElapsed].Invoke();
+            }
         }
     }
 }
