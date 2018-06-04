@@ -17,6 +17,7 @@ public class DayNightTalkingInteractable : Interactable
     private void Awake()
     {
         dialogueSystem = GetComponentInChildren<DialogueSystem>();
+        base.Awake();
     }
 
     public override void Interact()

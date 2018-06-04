@@ -32,7 +32,7 @@ public class Interactable : MonoBehaviour
         OnInteract();
     }
 
-    private void Awake()
+    protected void Awake()
     {
         OnInteract += TimeSystem.IncrementTime;
     }

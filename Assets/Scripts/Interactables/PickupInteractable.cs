@@ -10,6 +10,11 @@ public class PickupInteractable : Interactable
     private uint countToPickup;
     private bool completed = false;
 
+    private void Awake()
+    {
+        base.Awake();
+    }
+
     public override void Interact()
     {
         if(completed == false)

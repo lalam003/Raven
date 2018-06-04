@@ -8,6 +8,11 @@ public class ItemUseInteractable : Interactable
     private Item itemToCheck;
     private bool completed = false;
 
+    private void Awake()
+    {
+        base.Awake();
+    }
+
     public override void Interact()
     {
         if (completed == false)

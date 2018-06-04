@@ -8,7 +8,7 @@ public class DieOnNightEvent : EventTask
     {
         if(TimeSystem.isNight)
         {
-            Blackboard.Player.Respawn();
+            Blackboard.Player.PlayerDeath();
         }
     }
 }

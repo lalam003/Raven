@@ -13,6 +13,7 @@ public class TalkingInteractable : Interactable
     private void Awake()
     {
         dialogueSystem = GetComponentInChildren<DialogueSystem>();
+        base.Awake();
         
     }
     
