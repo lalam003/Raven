@@ -25,6 +25,18 @@ public class TalkingInteractable : Interactable
         else
         {
             dialogueSystem.DisplayText(fileName, keyName, () => { OnInteract(); });
+            Animator anim = GetComponent<Animator>();
+            if(anim != null)
+            {
+                if(Blackboard.Player.PlayerMovement.playerFacingDirection == PlayerMovement.Direction.West)
+                {
+                    anim.SetBool("FaceLeft", false);
+                }
+                else if (Blackboard.Player.PlayerMovement.playerFacingDirection == PlayerMovement.Direction.East)
+                {
+                    anim.SetBool("FaceLeft", true);
+                }
+            }
         }
     }
 }

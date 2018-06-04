@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
-    private enum Direction
+    public enum Direction
     {
         North = 0,
         South,
@@ -38,10 +38,10 @@ public class PlayerMovement : MonoBehaviour
     private const string WestKey = "Left";
     private const string IdleKey = "Idle";
 
-    private Direction playerFacingDirection;
     private PlayerControls playerControls;
     private Animator anim;
     private Rigidbody2D rb;
+    public Direction playerFacingDirection;
     public bool canMove = true;
     public bool CanMove
     {

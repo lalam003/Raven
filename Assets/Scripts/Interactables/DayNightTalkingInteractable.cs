@@ -35,6 +35,19 @@ public class DayNightTalkingInteractable : Interactable
             {
                 dialogueSystem.DisplayText(fileName, nightKeyName, () => { OnInteract(); });
             }
+
+            Animator anim = GetComponent<Animator>();
+            if (anim != null)
+            {
+                if (Blackboard.Player.PlayerMovement.playerFacingDirection == PlayerMovement.Direction.West)
+                {
+                    anim.SetBool("FaceLeft", false);
+                }
+                else if (Blackboard.Player.PlayerMovement.playerFacingDirection == PlayerMovement.Direction.East)
+                {
+                    anim.SetBool("FaceLeft", true);
+                }
+            }
         }
     }
 }
