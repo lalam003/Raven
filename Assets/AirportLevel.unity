@@ -5306,7 +5306,7 @@ GameObject:
   - component: {fileID: 599617397}
   - component: {fileID: 599617396}
   - component: {fileID: 599617395}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5583,42 +5583,42 @@ Prefab:
     - target: {fileID: 224305276266307768, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224305276266307768, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224305276266307768, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 109.805
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224305276266307768, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -9.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224305276266307768, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 219.61
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224827170902011166, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.57877594
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224827170902011166, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224827170902011166, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114613612397307384, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
@@ -5633,21 +5633,21 @@ Prefab:
     - target: {fileID: 224760126380561522, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224760126380561522, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224760126380561522, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: -14.29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1410366862514854, guid: 310341674b6f82540bf7cf3dfaa786f0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114764779077766930, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
