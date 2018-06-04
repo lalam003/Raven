@@ -1,0 +1,12 @@
+{
+	"day_dialogue": [
+		"Hello! My friend, how are you doing?",
+		"You don't know me? Awwwww.... my name is Beryl.",
+		"Don't worry, I remember you. Please come talk to me more"
+	],
+	"night_dialogue": [
+		"I don't want to leave.",
+		"I hope you stay with me. I am lonely"
+	]
+	
+}

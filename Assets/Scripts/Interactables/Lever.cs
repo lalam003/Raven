@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class Lever : EventTask
 {
+    [SerializeField]
+    private Sprite onImage, offImage;
+    private SpriteRenderer spriteRenderer;
     private bool on = false;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     public bool On
     {
         get
@@ -16,5 +25,13 @@ public class Lever : EventTask
     public override void ExecuteTask()
     {
         on = !on;
+        if(on)
+        {
+            spriteRenderer.sprite = onImage;
+        }
+        else
+        {
+            spriteRenderer.sprite = offImage;
+        }
     }
 }
