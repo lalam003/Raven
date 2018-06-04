@@ -30,11 +30,11 @@ public class DayNightTalkingInteractable : Interactable
         {
             if(TimeSystem.isNight)
             {
-                dialogueSystem.DisplayText(fileName, dayKeyName, () => { OnInteract(); });
+                dialogueSystem.DisplayText(fileName, nightKeyName, () => { OnInteract(); });
             }
             else
             {
-                dialogueSystem.DisplayText(fileName, nightKeyName, () => { OnInteract(); });
+                dialogueSystem.DisplayText(fileName, dayKeyName, () => { OnInteract(); });
             }
 
             Animator anim = GetComponent<Animator>();
