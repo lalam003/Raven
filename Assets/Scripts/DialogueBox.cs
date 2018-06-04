@@ -7,6 +7,7 @@ public class DialogueBox : MonoBehaviour
 
     private void Awake()
     {
+        Blackboard.Dialogue = this;
         dialogueText = GetComponentInChildren<Text>();
         if(dialogueText == null)
         {

@@ -17,7 +17,7 @@ public class DialogueSystem : MonoBehaviour
     private DialogueBox dialogueBox;
     //Text speed in letters per second
     [SerializeField]
-    private float textSpeed;
+    private float textSpeed = 1;
 
     private bool dialogueRunning = false;
     public bool DialogueRunning
@@ -28,12 +28,9 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void Start()
     {
-        if (dialogueBox == null)
-        {
-            Debug.LogError("DialogueBox Missing");
-        }
+        dialogueBox = Blackboard.Dialogue;
     }
 
     public void DisplayText(string filename, string key, Action callback = null)

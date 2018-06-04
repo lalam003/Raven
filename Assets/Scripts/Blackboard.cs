@@ -7,6 +7,7 @@
     public static MainMenu Menu;
     public static TitleMenu Title;
     public static AudioManager Audio;
+    public static DialogueBox Dialogue;
     public static bool PowerOn = true;
 
     public static PlayerControls ParseControlMap(PlayerControls newControls)
