@@ -23,5 +23,9 @@ public class ItemUseInteractable : Interactable
                 completed = true;
             }
         }
+        else
+        {
+            OnInteract();
+        }
     }
 }
