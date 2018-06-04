@@ -1,17 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using LightJson;
+using LightJson.Serialization;
 using UnityEngine;
-using System.IO;
-public class ReadJson : MonoBehaviour {
+//Author Danny Diep
+public class ReadJson : MonoBehaviour
+{
+    public static JsonObject ParseJsonFile(string filePath)
+    {
+        JsonObject data = new JsonObject();
+        try
+        {
+            data = JsonReader.ParseFile(filePath);
+        }
+        catch(JsonParseException exception)
+        {
+            Debug.LogError(exception);
+        }
 
-    string jsonString;
-	// Use this for initialization
-	void Start () {
-        jsonString = File.ReadAllText(Application.dataPath + "/Resources/Readthis.txt");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        return data;
+    }
 }

@@ -1,0 +1,11 @@
+{
+	"day_dialogue": [
+		"Hi! My name is Lyly. How are you doing?",
+		"Please refrain from touching the detectors! It is not safe."
+	],
+	"night_dialogue": [
+		"I don't want to leave.",
+		"I hope you stay with me. I am lonely"
+	]
+	
+}

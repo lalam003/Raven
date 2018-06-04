@@ -1,6 +1,23 @@
-﻿using LightJson;
-
-public static class Blackboard
+﻿public static class Blackboard
 {
+    // Static references
+    public static GameManager GM;
     public static PlayerControls ControlMap;
+    public static Player Player;
+    public static MainMenu Menu;
+    public static TitleMenu Title;
+    public static AudioManager Audio;
+    public static DialogueBox Dialogue;
+    public static bool PowerOn = true;
+
+    public static PlayerControls ParseControlMap(PlayerControls newControls)
+    {
+        if (ControlMap != null)
+        {
+            return ControlMap;
+        }
+        ControlMap = newControls;
+
+        return newControls;
+    }
 }

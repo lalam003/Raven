@@ -1,0 +1,14 @@
+{
+	"day_dialogue": [
+		"Who are you? What do you want?",
+		"Oh just to talk. I hope you are willing to lose your head.",
+		"HAHAHAHAHA!",
+		"Sorry, bad joke. I generally keep to myself.",
+		"My name is Sana by the way."
+	],
+	"night_dialogue": [
+		"I don't want to leave.",
+		"I hope you stay with me. I am lonely"
+	]
+	
+}

@@ -2,13 +2,13 @@ using System;
 
 namespace LightJson.Serialization
 {
-	/// <summary>
-	/// The exception that is thrown when a JSON message cannot be parsed.
-	/// </summary>
-	/// <remarks>
-	/// This exception is only intended to be thrown by LightJson.
-	/// </remarks>
-	public sealed class JsonParseException : Exception
+    /// <summary>
+    /// The exception that is thrown when a JSON message cannot be parsed.
+    /// </summary>
+    /// <remarks>
+    /// This exception is only intended to be thrown by LightJson.
+    /// </remarks>
+    public sealed class JsonParseException : Exception
 	{
 		/// <summary>
 		/// Gets the text position where the error occurred.
