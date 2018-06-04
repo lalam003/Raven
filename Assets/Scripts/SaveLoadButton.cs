@@ -45,6 +45,10 @@ public class SaveLoadButton : MonoBehaviour
             Blackboard.Player.GetComponent<Inventory>().AddItem(item, PlayerData.currentPlayer.amount[i]);
             Debug.Log("loaded: " + item.name);
         }
+        foreach (GameObject note in PlayerData.currentPlayer.pickups)
+        {
+            note.gameObject.SetActive(false);
+        }
         return true;
     }
     public void Delete()

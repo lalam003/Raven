@@ -10,6 +10,7 @@ public class PlayerData
     public Vector3 currentPosition;
     public List<string> eventList;
     public List<bool> eventHasOccurred;
+    public List<GameObject> pickups;
     public List<string> items;
     public List<uint> amount;
     //Itemdata
@@ -21,6 +22,7 @@ public class PlayerData
     {
         currentPosition = new Vector3();
         eventList = new List<string>();
+        pickups = new List<GameObject>();
         eventHasOccurred = new List<bool>();
         items = new List<string>();
         amount = new List<uint>();

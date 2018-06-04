@@ -73,6 +73,7 @@ public class MainMenu : MenuBase
     protected override void OnEnable()
     {
         base.OnEnable();
+        menuListLength = currentList.Count;
         resetScrollPosition();
         clearListText(menuColumns[1].innerList);
         clearQty();

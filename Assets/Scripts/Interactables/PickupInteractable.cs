@@ -22,6 +22,7 @@ public class PickupInteractable : Interactable
             Blackboard.Player.Inventory.AddItem(itemToPickup, countToPickup);
             OnInteract();
             completed = true;
+            PlayerData.currentPlayer.pickups.Add(gameObject);
             gameObject.SetActive(false);
         }
     }
