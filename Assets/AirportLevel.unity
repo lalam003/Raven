@@ -5321,42 +5321,42 @@ Prefab:
     - target: {fileID: 224305276266307768, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224305276266307768, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224305276266307768, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 109.805
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224305276266307768, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -9.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224305276266307768, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 219.61
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224827170902011166, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.57877594
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224827170902011166, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224827170902011166, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114613612397307384, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
@@ -5371,21 +5371,21 @@ Prefab:
     - target: {fileID: 224760126380561522, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224760126380561522, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224760126380561522, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: -14.29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1410366862514854, guid: 310341674b6f82540bf7cf3dfaa786f0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114764779077766930, guid: 310341674b6f82540bf7cf3dfaa786f0,
         type: 2}
@@ -6428,6 +6428,11 @@ Prefab:
         type: 2}
       propertyPath: fileName
       value: Lulu.json
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083468109118748, guid: 1e765a169ff43ee44bf8383047a68e92,
+        type: 2}
+      propertyPath: occurOnce
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e765a169ff43ee44bf8383047a68e92, type: 2}
@@ -30517,6 +30522,11 @@ Prefab:
       propertyPath: fileName
       value: Sana.json
       objectReference: {fileID: 0}
+    - target: {fileID: 114981127279498898, guid: df9c91d7ffd4c884cbed7744ca600fb3,
+        type: 2}
+      propertyPath: occurOnce
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df9c91d7ffd4c884cbed7744ca600fb3, type: 2}
   m_IsPrefabParent: 0
@@ -47110,6 +47120,11 @@ Prefab:
       propertyPath: fileName
       value: Borys.json
       objectReference: {fileID: 0}
+    - target: {fileID: 114557249540680218, guid: eaabc2a40f51f0340b36c14b05a5cc77,
+        type: 2}
+      propertyPath: occurOnce
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eaabc2a40f51f0340b36c14b05a5cc77, type: 2}
   m_IsPrefabParent: 0
@@ -47608,6 +47623,11 @@ Prefab:
       propertyPath: fileName
       value: Beryl.json
       objectReference: {fileID: 0}
+    - target: {fileID: 114485890161587258, guid: 460e1ea80cde72747a5c5da533b293ee,
+        type: 2}
+      propertyPath: occurOnce
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 460e1ea80cde72747a5c5da533b293ee, type: 2}
   m_IsPrefabParent: 0
@@ -47696,6 +47716,11 @@ Prefab:
         type: 2}
       propertyPath: fileName
       value: Ner.json
+      objectReference: {fileID: 0}
+    - target: {fileID: 114294795441158068, guid: 262c2239bdcc09a4189a5ca8e4b9a984,
+        type: 2}
+      propertyPath: occurOnce
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 262c2239bdcc09a4189a5ca8e4b9a984, type: 2}
