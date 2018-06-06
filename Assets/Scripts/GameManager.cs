@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Image BlackScreen;
     public delegate void CoroutineAction();
     public SaveLoadButton saveButton;
+    public List<GameObject> ResetPickups = new List<GameObject>();
 
     private void Awake()
     {

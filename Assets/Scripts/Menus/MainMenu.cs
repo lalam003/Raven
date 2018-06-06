@@ -179,6 +179,10 @@ public class MainMenu : MenuBase
             {
                 closeMenu();
                 Blackboard.Title.gameObject.SetActive(true);
+                foreach (GameObject go in Blackboard.GM.ResetPickups)
+                {
+                    go.SetActive(true);
+                }
             },
             () =>
             {
